@@ -580,6 +580,8 @@ section {
     top: 5rem;
     left: 0;
     right: 0;
+    width: 100vw;
+    max-width: 100vw;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(108, 62, 180, 0.1);
@@ -589,6 +591,8 @@ section {
     gap: 0;
     padding: 1.5rem 0;
     z-index: 999;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .navbar-nav.mobile-active .nav-menu {
@@ -657,8 +661,20 @@ body.menu-open {
         height: 4rem;
     }
     
+    /* CRÍTICO: Ocultar navegación desktop en móvil */
+    .navbar-nav {
+        display: none !important;
+    }
+    
+    /* Mostrar solo cuando está activa */
     .navbar-nav.mobile-active {
+        display: flex !important;
         top: 4rem;
+    }
+    
+    /* Asegurar que el botón móvil sea visible */
+    .mobile-menu-toggle {
+        display: flex !important;
     }
 }
 
@@ -700,12 +716,54 @@ body.menu-open {
 
 /* Móvil (767px y menos) */
 @media (max-width: 767px) {
+    /* Prevenir scroll horizontal en móvil */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+    
+    .navbar-header {
+        width: 100vw;
+        max-width: 100vw;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+    }
+    
     .navbar-container {
-        padding: 0 1rem;
+        padding: 0 0.75rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .navbar-content {
         height: 4rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* Asegurar que el logo no cause overflow */
+    .navbar-logo {
+        flex-shrink: 0;
+        max-width: 60%;
+    }
+    
+    .logo-image {
+        max-width: 100%;
+        height: auto;
+        max-height: 2.5rem;
+    }
+    
+    /* Asegurar que el botón móvil sea accesible */
+    .mobile-menu-toggle {
+        flex-shrink: 0;
+        margin-left: auto;
+        width: 2.5rem;
+        height: 2.5rem;
     }
     
     .logo-image {
@@ -2020,25 +2078,99 @@ body.menu-open {
     line-height: 1.6;
 }
 
-/* Responsive optimizado para team section móvil */
+/* Responsive optimizado para team section móvil - MANTENER DISEÑO WEB */
 @media (max-width: 767px) {
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    .team-section {
+        padding: 4rem 0;
+        background-color: var(--light-gray);
+    }
+    
+    .team-header {
+        margin: 0 auto 3rem;
         padding: 0 1rem;
     }
     
+    .team-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 1rem;
+    }
+    
+    .team-subtitle {
+        font-size: 1rem;
+        color: var(--gray);
+        line-height: 1.6;
+    }
+    
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+    
     .team-card {
-        padding: 1.5rem;
-        max-width: 300px;
+        background-color: var(--white);
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        max-width: 100%;
         margin: 0 auto;
+        /* MANTENER todos los estilos originales */
+    }
+    
+    .team-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .team-image-container {
+        margin-bottom: 1.5rem;
     }
     
     .team-image {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto 1rem;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto;
+        box-shadow: 0 4px 12px rgba(108, 62, 180, 0.2);
+        transition: transform 0.3s ease;
     }
+    
+    .team-card:hover .team-image {
+        transform: scale(1.05);
+    }
+    
+    .team-info {
+        text-align: center;
+    }
+    
+    .team-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 0.5rem;
+    }
+    
+    .team-role {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+    
+    .team-description {
+        font-size: 0.95rem;
+        color: var(--gray);
+        line-height: 1.6;
+        margin: 0;
+    }
+}
     
     .team-name {
         font-size: 1.1rem;
@@ -2100,10 +2232,91 @@ body.menu-open {
 }
 
 @media (max-width: 767px) {
+    .cta-about-section {
+        padding: 4rem 0;
+        background: var(--gradient-secondary);
+        color: var(--primary);
+    }
+    
+    .cta-about-content {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
     .cta-about-title {
         font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--primary);
+        line-height: 1.3;
     }
-}
+    
+    .cta-about-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+        color: var(--primary);
+    }
+    
+    .cta-about-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .cta-about-buttons .btn-primary,
+    .cta-about-buttons .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        font-size: 1rem;
+        text-decoration: none;
+        min-width: 200px;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 48px; /* Área de toque apropiada */
+    }
+    
+    .cta-about-buttons .btn-primary {
+        background: var(--gradient-primary);
+        color: var(--white);
+        border: 1px solid var(--primary);
+        box-shadow: 0 4px 6px rgba(108, 62, 180, 0.25);
+    }
+    
+    .cta-about-buttons .btn-primary:hover {
+        background: linear-gradient(135deg, #5632A1 0%, #6C3EB4 100%);
+        border-color: var(--primary-dark);
+        box-shadow: 0 8px 16px rgba(108, 62, 180, 0.35);
+        transform: translateY(-2px);
+        color: var(--white);
+    }
+    
+    .cta-about-buttons .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+    
+    .cta-about-buttons .btn-outline:hover {
+        background: var(--primary);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(108, 62, 180, 0.25);
+    }
+
 
 /* Ensure consistent button styling across pages */
 .cta-about-buttons .btn-primary,
@@ -2540,69 +2753,178 @@ body.menu-open {
         max-width: 250px !important;
     }
     
-    /* ===== CONTACT SECTION MÓVIL ===== */
+    /* ===== CONTACT SECTION MÓVIL - MEJORADO ===== */
     .contact-section {
         padding: 3rem 0;
+        background-color: var(--white);
+    }
+    
+    .contact-content {
+        padding: 0 1rem;
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: var(--white);
+        box-sizing: border-box;
     }
     
     .contact-title {
         font-size: 1.8rem;
         margin-bottom: 1rem;
+        line-height: 1.3;
+        text-align: center;
     }
     
     .contact-subtitle {
         font-size: 1rem;
         margin-bottom: 2rem;
         line-height: 1.5;
+        text-align: center;
     }
     
     .contact-form {
-        gap: 1rem;
+        gap: 1.2rem;
+        max-width: 100%;
     }
     
     .form-select,
     .contact-form input {
-        padding: 0.875rem;
-        font-size: 1rem;
+        padding: 1rem;
+        font-size: 16px; /* Evita zoom en iOS */
+        border: 2px solid var(--border);
+        border-radius: 0.75rem;
+        background-color: var(--white);
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        min-height: 48px; /* Área de toque apropiada */
+    }
+    
+    .form-select:focus,
+    .contact-form input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(108, 62, 180, 0.15);
+        outline: none;
     }
     
     .contact-submit-btn {
-        padding: 1rem;
+        padding: 1.2rem;
         font-size: 1rem;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        min-height: 48px;
+        width: 100%;
+        touch-action: manipulation;
+        background: var(--gradient-primary);
+        color: var(--white);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+    }
+    
+    .contact-submit-btn:hover,
+    .contact-submit-btn:focus {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+    }
+    
+    .contact-submit-btn:active {
+        transform: scale(0.98);
     }
     
     .contact-terms {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         line-height: 1.4;
+        text-align: center;
+        margin: 1rem 0 0;
     }
     
-    /* ===== FOOTER MÓVIL ===== */
+    .contact-terms a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 500;
+    }
+    
+    /* ===== FOOTER MÓVIL - MEJORADO ===== */
     .footer-section {
-        padding: 2rem 0 1.5rem;
+        padding: 2.5rem 0 1.5rem;
+        background-color: var(--dark) !important;
+        color: var(--white) !important;
     }
     
     .footer-content {
         gap: 1.5rem;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-logo {
+        text-align: center;
     }
     
     .footer-logo-img {
-        height: 3rem;
+        height: 3.5rem;
+        max-width: 100%;
+        filter: brightness(0) invert(1) !important;
+        transition: transform 0.3s ease;
+    }
+    
+    .footer-logo-img:hover {
+        transform: scale(1.05);
     }
     
     .footer-links {
+        display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.2rem;
         text-align: center;
+        align-items: center;
+        width: 100%;
     }
     
     .footer-link {
         font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8) !important;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        min-width: 120px;
+        font-weight: 500;
+    }
+    
+    .footer-link:hover,
+    .footer-link:focus {
+        color: var(--white) !important;
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+    }
+    
+    .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
     }
     
     .footer-copyright {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         text-align: center;
-        line-height: 1.4;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.7) !important;
+        margin: 0;
+        padding: 0 1rem;
     }
     
     /* ===== BOTONES Y ELEMENTOS INTERACTIVOS MÓVIL ===== */
@@ -2704,6 +3026,76 @@ body.menu-open {
         .testimonials-title {
             font-size: 1.6rem !important;
         }
+        
+        /* Mejorar formulario de contacto en pantallas pequeñas */
+        .contact-form {
+            gap: 1rem;
+        }
+        
+        .form-select,
+        .contact-form input {
+            padding: 0.875rem;
+            font-size: 16px;
+            border-radius: 0.5rem;
+        }
+        
+        .contact-submit-btn {
+            padding: 1rem;
+            font-size: 0.95rem;
+            border-radius: 0.5rem;
+        }
+        
+        /* Optimizar header en pantallas pequeñas */
+        .navbar-container {
+            padding: 0 0.5rem !important;
+        }
+        
+        .navbar-content {
+            height: 3.5rem;
+        }
+        
+        .logo-image {
+            max-height: 2rem;
+        }
+        
+        .mobile-menu-toggle {
+            width: 2rem;
+            height: 2rem;
+        }
+        
+        .hamburger-line {
+            width: 1.25rem;
+        }
+        
+        /* Asegurar que no haya overflow */
+        .navbar-header {
+            width: 100vw;
+            max-width: 100vw;
+        }
+        
+        /* Optimizar footer en pantallas pequeñas */
+        .footer-section {
+            padding: 2rem 0 1rem;
+        }
+        
+        .footer-logo-img {
+            height: 3rem;
+        }
+        
+        .footer-links {
+            gap: 0.8rem;
+        }
+        
+        .footer-link {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            min-width: 100px;
+        }
+        
+        .footer-copyright {
+            font-size: 0.8rem;
+            padding: 0 0.5rem;
+        }
     }
     
     /* ===== OPTIMIZACIONES PARA DISPOSITIVOS PEQUEÑOS ===== */
@@ -2728,10 +3120,72 @@ body.menu-open {
         .testimonial-card {
             padding: 1.5rem 1rem;
         }
+        
+        /* Formulario de contacto en pantallas muy pequeñas */
+        .contact-section {
+            padding: 2.5rem 0;
+        }
+        
+        .contact-content {
+            padding: 0 0.75rem;
+        }
+        
+        .contact-title {
+            font-size: 1.6rem;
+            margin-bottom: 0.875rem;
+        }
+        
+        .contact-subtitle {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-select,
+        .contact-form input {
+            padding: 0.8rem;
+            font-size: 16px;
+        }
+        
+        .contact-submit-btn {
+            padding: 0.95rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer en pantallas muy pequeñas */
+        .footer-section {
+            padding: 1.5rem 0 1rem;
+        }
+        
+        .footer-content {
+            padding: 0 0.75rem;
+        }
+        
+        .footer-logo-img {
+            height: 2.5rem;
+        }
+        
+        .footer-links {
+            gap: 0.6rem;
+        }
+        
+        .footer-link {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.6rem;
+            min-width: 90px;
+        }
+        
+        .footer-copyright {
+            font-size: 0.75rem;
+        }
     }
 }
 
 /* ===== PÁGINA GRACIAS - ESTILOS MÓVIL ===== */
+
+/* Ajuste específico para página de gracias con body margin */
+.thank-you-body {
+    margin-top: 5rem; /* Para compensar el navbar fijo */
+}
 
 /* Estilos base para página de gracias */
 .thank-you-section {
@@ -2758,6 +3212,7 @@ body.menu-open {
     justify-content: center;
     margin: 0 auto 2rem;
     box-shadow: 0 10px 25px rgba(108, 62, 180, 0.3);
+    transition: transform 0.3s ease;
 }
 
 .thank-you-icon i {
@@ -2770,6 +3225,7 @@ body.menu-open {
     font-size: 2.5rem;
     color: var(--primary);
     margin-bottom: 1.5rem;
+    font-weight: 700;
 }
 
 .lead {
@@ -2781,6 +3237,13 @@ body.menu-open {
 
 .next-steps {
     margin: 4rem 0;
+}
+
+.next-steps h3 {
+    font-size: 1.75rem;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
 .steps-grid {
@@ -2797,6 +3260,12 @@ body.menu-open {
     box-shadow: var(--shadow);
     position: relative;
     border-top: 4px solid var(--primary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .step-number {
@@ -2818,6 +3287,14 @@ body.menu-open {
 .step-card h4 {
     margin: 1rem 0 0.5rem;
     color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.step-card p {
+    color: var(--gray);
+    line-height: 1.5;
+    margin: 0;
 }
 
 .cta-actions {
@@ -2834,6 +3311,12 @@ body.menu-open {
     border-top: 1px solid var(--border);
 }
 
+.contact-info p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
 .contact-details {
     display: flex;
     gap: 2rem;
@@ -2848,14 +3331,24 @@ body.menu-open {
     color: var(--primary);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 0.5rem;
     transition: all 0.3s ease;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(108, 62, 180, 0.1);
 }
 
 .contact-item:hover {
     background: var(--secondary);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: var(--primary-dark);
+}
+
+.contact-item i {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 /* Optimizaciones móvil para página de gracias */
@@ -2965,12 +3458,63 @@ body.menu-open {
 
 /* ===== MEJORAS ADICIONALES PARA MÓVIL ===== */
 
+/* ===== MEJORAS ADICIONALES PARA MÓVIL ===== */
+
+/* Prevenir scroll horizontal GLOBAL en móvil */
+@media (max-width: 767px) {
+    * {
+        box-sizing: border-box;
+    }
+    
+    html {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+    
+    body {
+        overflow-x: hidden;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Asegurar que todos los contenedores respeten el ancho */
+    .w-full, 
+    .max-w-screen-xl, 
+    .mx-auto, 
+    .px-5 {
+        max-width: 100% !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Asegurar que el body no haga scroll cuando el menú está abierto */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
 /* Optimización del menú móvil */
 @media (max-width: 767px) {
     
+    /* CRÍTICO: Ocultar elementos desktop y mostrar móvil */
+    .navbar-nav {
+        display: none !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+    
     /* Mejoras en la navegación móvil */
     .navbar-nav.mobile-active {
+        display: flex !important;
         animation: slideDown 0.3s ease-out;
+        z-index: 9999;
     }
     
     @keyframes slideDown {
@@ -2984,105 +3528,243 @@ body.menu-open {
         }
     }
     
-    /* Optimización de formularios para móvil */
-    .form-select,
-    .contact-form input,
-    .contact-form textarea {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: 0.5rem;
-        font-size: 16px; /* Previene zoom en iOS */
+    /* Asegurar que el header esté visible en móvil */
+    .navbar-header {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9998;
+        background: var(--white) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     
-    /* Mejores áreas de toque */
-    .cta-button-primary,
-    .cta-button-secondary,
-    .contact-submit-btn,
-    .cta-center-button {
-        min-height: 48px;
-        touch-action: manipulation;
-    }
-    
-    /* Optimización de imágenes para móvil */
-    .hero-image,
-    .about-main-image,
-    .cta-phone-image {
-        max-width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-    
-    /* Mejora en la legibilidad de texto */
-    .hero-subtitle,
-    .about-hero-subtitle,
-    .feature-description,
-    .testimonial-text {
-        text-align: left;
-        hyphens: auto;
-        word-wrap: break-word;
-    }
-    
-    /* Optimización de espaciado vertical */
-    .hero-section,
-    .how-it-works-section,
-    .features-detailed-section,
-    .testimonials-section,
-    .cta-download-section,
-    .contact-section {
-        scroll-margin-top: 5rem; /* Para navegación suave */
-    }
-    
-    /* Mejora en elementos interactivos */
-    .download-button-card:active,
-    .team-card:active,
-    .feature-card-compact:active {
-        transform: scale(0.98);
-        transition: transform 0.1s ease;
-    }
-    
-    /* Optimización de la tipografía móvil */
-    .section-title,
-    .section-title-center,
-    .hero-title,
-    .about-hero-title {
-        word-wrap: break-word;
-        hyphens: auto;
-    }
-    
-    /* Mejoras de accesibilidad */
-    .nav-item:focus,
-    .btn:focus,
-    .form-select:focus,
-    .contact-form input:focus {
-        outline: 2px solid var(--primary);
-        outline-offset: 2px;
-    }
-    
-    /* Optimización para pantallas muy pequeñas */
-    @media (max-width: 320px) {
-        .hero-title {
-            font-size: 1.4rem !important;
+    /* Añadir padding-top al body para compensar el header fijo */
+    body {
+        padding-top: 4rem !important;
+    }        /* Optimización de formularios para móvil */
+        .form-select,
+        .contact-form input,
+        .contact-form textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0.5rem;
+            font-size: 16px; /* Previene zoom en iOS */
+            transition: all 0.3s ease;
         }
         
-        .section-title,
-        .section-title-center {
-            font-size: 1.4rem !important;
+        /* Estados de focus mejorados */
+        .form-select:focus,
+        .contact-form input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 62, 180, 0.2);
+            transform: translateY(-1px);
         }
         
+        /* Mejores áreas de toque */
         .cta-button-primary,
-        .cta-button-secondary {
-            padding: 0.75rem;
-            font-size: 0.85rem;
+        .cta-button-secondary,
+        .contact-submit-btn,
+        .cta-center-button {
+            min-height: 48px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        .detailed-feature-card,
-        .testimonial-card,
-        .step-card {
-            padding: 1rem;
+        /* Efecto de presión en botones */
+        .contact-submit-btn:active,
+        .btn:active {
+            transform: scale(0.97);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Optimización de imágenes para móvil */
+        .hero-image,
+        .about-main-image,
+        .cta-phone-image {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        /* Mejora en la legibilidad de texto */
+        .hero-subtitle,
+        .about-hero-subtitle,
+        .feature-description,
+        .testimonial-text {
+            text-align: left;
+            hyphens: auto;
+            word-wrap: break-word;
+        }
+        
+        /* Optimización de espaciado vertical */
+        .hero-section,
+        .how-it-works-section,
+        .features-detailed-section,
+        .testimonials-section,
+        .cta-download-section,
+        .contact-section {
+            scroll-margin-top: 5rem; /* Para navegación suave */
+        }
+        
+        /* Mejora en elementos interactivos */
+        .download-button-card:active,
+        .team-card:active,
+        .feature-card-compact:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Optimización de la tipografía móvil */
+        .section-title,
+        .section-title-center,
+        .hero-title,
+        .about-hero-title {
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        /* Mejoras de accesibilidad */
+        .nav-item:focus,
+        .btn:focus,
+        .form-select:focus,
+        .contact-form input:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }        /* Optimización para pantallas muy pequeñas */
+        @media (max-width: 320px) {
+            .hero-title {
+                font-size: 1.4rem !important;
+            }
+            
+            .section-title,
+            .section-title-center {
+                font-size: 1.4rem !important;
+            }
+            
+            .cta-button-primary,
+            .cta-button-secondary {
+                padding: 0.75rem;
+                font-size: 0.85rem;
+            }
+            
+            .detailed-feature-card,
+            .testimonial-card,
+            .step-card {
+                padding: 1rem;
+            }
+            
+            /* Header ultra compacto */
+            .navbar-container {
+                padding: 0 0.25rem !important;
+            }
+            
+            .navbar-content {
+                height: 3rem;
+            }
+            
+            .logo-image {
+                max-height: 1.75rem;
+            }
+            
+            .mobile-menu-toggle {
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+            
+            .hamburger-line {
+                width: 1rem;
+                height: 2px;
+            }
+            
+            /* Prevenir cualquier overflow horizontal */
+            .navbar-header {
+                width: 100vw;
+                max-width: 100vw;
+                left: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Ajustar padding del body */
+            body {
+                padding-top: 3rem !important;
+            }
+            
+            /* Formulario ultra compacto */
+            .contact-section {
+                padding: 2rem 0;
+            }
+            
+            .contact-content {
+                padding: 0 0.5rem;
+            }
+            
+            .contact-title {
+                font-size: 1.4rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .contact-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 1.25rem;
+            }
+            
+            .form-select,
+            .contact-form input {
+                padding: 0.75rem;
+                font-size: 16px;
+                border-radius: 0.5rem;
+            }
+            
+            .contact-submit-btn {
+                padding: 0.875rem;
+                font-size: 0.85rem;
+                border-radius: 0.5rem;
+            }
+            
+            .contact-terms {
+                font-size: 0.8rem;
+            }
+            
+            /* Footer ultra compacto */
+            .footer-section {
+                padding: 1.25rem 0 0.75rem;
+            }
+            
+            .footer-content {
+                padding: 0 0.5rem;
+                gap: 1rem;
+            }
+            
+            .footer-logo-img {
+                height: 2.25rem;
+            }
+            
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-link {
+                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+                min-width: 80px;
+            }
+            
+            .footer-bottom {
+                margin-top: 1.5rem;
+                padding-top: 1rem;
+            }
+            
+            .footer-copyright {
+                font-size: 0.7rem;
+                padding: 0 0.25rem;
+            }
         }
     }
-    
+
     /* Mejoras en el rendimiento móvil */
     * {
         -webkit-tap-highlight-color: transparent;
@@ -3114,5 +3796,4 @@ body.menu-open {
             scroll-behavior: auto !important;
         }
     }
-}
 }

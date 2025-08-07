@@ -478,14 +478,56 @@
         <i data-feather="arrow-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <script src="script-nubira.js"></script>
     <script>
         // Initialize Feather Icons
         feather.replace();
         
-        // Basic mobile menu functionality
-        document.getElementById('mobile-menu-button')?.addEventListener('click', function() {
-            console.log('Mobile menu clicked');
+        // Funcionalidad del menú móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navbarNav = document.querySelector('.navbar-nav');
+            
+            if (mobileMenuToggle && navbarNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navbarNav.classList.toggle('mobile-active');
+                    mobileMenuToggle.classList.toggle('menu-open');
+                    document.body.classList.toggle('menu-open');
+                });
+                
+                // Cerrar menú al hacer clic en un enlace
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        navbarNav.classList.remove('mobile-active');
+                        mobileMenuToggle.classList.remove('menu-open');
+                        document.body.classList.remove('menu-open');
+                    });
+                });
+                
+                // Cerrar menú al hacer clic fuera de él
+                document.addEventListener('click', function(e) {
+                    if (!navbarNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        navbarNav.classList.remove('mobile-active');
+                        mobileMenuToggle.classList.remove('menu-open');
+                        document.body.classList.remove('menu-open');
+                    }
+                });
+            }
+            
+            // Analytics tracking para conversión de formulario
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'conversion', {
+                            'event_category': 'Contact',
+                            'event_label': 'Form Submitted',
+                            'page_location': window.location.href
+                        });
+                    }
+                });
+            }
         });
     </script>
 </body>

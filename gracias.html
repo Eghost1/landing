@@ -53,22 +53,41 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="assets/logoNUBIRA.png" alt="Nubira Logo">
+    <header class="navbar-header">
+        <div class="navbar-container">
+            <div class="navbar-content">
+                <!-- Logo -->
+                <div class="navbar-logo">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/logoNUBIRA.png" alt="Nubira Logo" class="logo-image">
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="navbar-nav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html" class="nav-item">Inicio</a></li>
+                        <li><a href="index.html#caracteristicas" class="nav-item">Funcionalidades</a></li>
+                        <li><a href="index.html#contacto" class="nav-item">Contacto</a></li>
+                    </ul>
+                    <div class="nav-cta">
+                        <a href="index.html#contacto" class="cta-button">¡Comenzar!</a>
+                    </div>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menú">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             </div>
-            <nav>
-                <a href="index.html" class="nav-link">Inicio</a>
-                <a href="index.html#caracteristicas" class="nav-link">Funcionalidades</a>
-                <a href="index.html#contacto" class="nav-link">Contacto</a>
-            </nav>
         </div>
     </header>
 
     <!-- Thank You Section -->
     <section class="thank-you-section">
-        <div class="container">
+        <div class="w-full max-w-screen-xl mx-auto px-5">
             <div class="thank-you-content">
                 <div class="thank-you-icon">
                     <i data-feather="check-circle"></i>
@@ -110,19 +129,19 @@
         <div class="w-full max-w-screen-xl mx-auto px-5">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img alt="Nubira Logo" loading="lazy" 
+                    <img alt="Nubira Logo - Plataforma de trabajadores verificados" loading="lazy" 
                          src="assets/logoNUBIRA.png" class="footer-logo-img">
                 </div>
                 <div class="footer-links">
-                    <a href="index.html#caracteristicas" class="footer-link">Funcionalidades</a>
-                    <a href="nosotros.html" class="footer-link">Nosotros</a>
-                    <a href="index.html#contacto" class="footer-link">Contacto</a>
-                    <a href="#" class="footer-link">Términos</a>
-                    <a href="#" class="footer-link">Privacidad</a>
+                    <a href="index.html#caracteristicas" class="footer-link" title="Funcionalidades de Nubira">Funcionalidades Nubira</a>
+                    <a href="nosotros.html" class="footer-link" title="Conoce el equipo de Nubira">Nosotros Nubira</a>
+                    <a href="index.html#contacto" class="footer-link" title="Contacta con Nubira">Contacto Nubira</a>
+                    <a href="#" class="footer-link" title="Términos y condiciones de Nubira">Términos Nubira</a>
+                    <a href="#" class="footer-link" title="Política de privacidad de Nubira">Privacidad Nubira</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="footer-copyright">© 2025 Nubira. Todos los derechos reservados.</p>
+                <p class="footer-copyright">© 2025 Nubira - Plataforma de trabajadores verificados. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -130,8 +149,29 @@
     <script>
         feather.replace();
         
-        // Inicializar funcionalidades específicas de la página de gracias
+        // Funcionalidad del menú móvil
         document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navbarNav = document.querySelector('.navbar-nav');
+            
+            if (mobileMenuToggle && navbarNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navbarNav.classList.toggle('mobile-active');
+                    mobileMenuToggle.classList.toggle('menu-open');
+                    document.body.classList.toggle('menu-open');
+                });
+                
+                // Cerrar menú al hacer clic en un enlace
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        navbarNav.classList.remove('mobile-active');
+                        mobileMenuToggle.classList.remove('menu-open');
+                        document.body.classList.remove('menu-open');
+                    });
+                });
+            }
+            
             // Animación de entrada para el ícono
             const thankYouIcon = document.querySelector('.thank-you-icon');
             if (thankYouIcon) {
