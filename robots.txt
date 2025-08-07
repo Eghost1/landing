@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.nubiraoficial.cl/sitemap.xml
+
+# Disallow admin areas if any
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /.git/
+
+# Allow search engines to crawl important pages
+Allow: /index.html
+Allow: /nosotros.html
+Allow: /gracias.html
+Allow: /assets/
+Allow: /styles.css
+Allow: /script-nubira.js
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1
+
+# Additional directives for better SEO
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
