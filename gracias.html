@@ -51,7 +51,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDTVWF7C"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-     
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -143,137 +143,28 @@
 
     <script>
         feather.replace();
+        
+        // Inicializar funcionalidades específicas de la página de gracias
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de entrada para el ícono
+            const thankYouIcon = document.querySelector('.thank-you-icon');
+            if (thankYouIcon) {
+                setTimeout(() => {
+                    thankYouIcon.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        thankYouIcon.style.transform = 'scale(1)';
+                    }, 200);
+                }, 500);
+            }
+            
+            // Analytics tracking para conversión
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'event_category': 'Contact',
+                    'event_label': 'Form Submitted'
+                });
+            }
+        });
     </script>
-
-    <style>
-        .thank-you-section {
-            padding: 8rem 0 6rem;
-            background: var(--gradient-secondary);
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .thank-you-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .thank-you-icon {
-            width: 5rem;
-            height: 5rem;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            box-shadow: 0 10px 25px rgba(108, 62, 180, 0.3);
-        }
-
-        .thank-you-icon i {
-            color: var(--white);
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-
-        .thank-you-content h1 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .lead {
-            font-size: 1.25rem;
-            color: var(--gray);
-            margin-bottom: 3rem;
-            line-height: 1.6;
-        }
-
-        .next-steps {
-            margin: 4rem 0;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .step-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
-            position: relative;
-            border-top: 4px solid var(--primary);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -1rem;
-            left: 2rem;
-            width: 2rem;
-            height: 2rem;
-            background: var(--gradient-primary);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        .step-card h4 {
-            margin: 1rem 0 0.5rem;
-            color: var(--primary);
-        }
-
-        .cta-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .contact-info {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .contact-details {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        .footer-logo {
-            max-height: 40px;
-            margin-bottom: 1rem;
-        }
-    </style>
 </body>
 </html>
