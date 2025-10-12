@@ -171,71 +171,34 @@
     </style>
     
     <script>
-        // Obtener el ID del servicio de la URL
-        function getServiceId() {
-            const path = window.location.pathname;
-            const parts = path.split('/');
-            return parts[parts.length - 1] || 'unknown';
-        }
-        
-        // Detectar dispositivo
-        function getDeviceType() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            if (userAgent.includes('android')) return 'android';
-            if (userAgent.includes('iphone') || userAgent.includes('ipad')) return 'ios';
-            return 'web';
-        }
-        
-        // Intentar abrir la app
-        function tryOpenApp() {
-            const serviceId = getServiceId();
-            const deviceType = getDeviceType();
-            
-            // Mostrar estado
-            document.getElementById('status').textContent = `Abriendo servicio ${serviceId}...`;
-            
-            // Intentar deep link
-            setTimeout(() => {
-                const deepLink = `nubiraseguridad://servicio/${serviceId}`;
-                
-                // Crear elemento invisible para el intento
-                const link = document.createElement('a');
-                link.href = deepLink;
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                
-                try {
-                    link.click();
-                    document.getElementById('status').textContent = 'Redirigiendo a la app...';
-                } catch (e) {
-                    console.log('Deep link failed:', e);
-                }
-            }, 500);
-            
-            // Fallback a tienda después de 3 segundos
-            setTimeout(() => {
-                redirectToStore(deviceType);
-            }, 3000);
-        }
-        
-        // Redirigir a tienda
-        function redirectToStore(deviceType) {
-            switch (deviceType) {
-                case 'android':
-                    window.location.href = 'https://play.google.com/store/apps/details?id=com.nubira.seguridad';
-                    break;
-                case 'ios':
-                    window.location.href = 'https://apps.apple.com/app/nubira-seguridad/id123456789';
-                    break;
-                default:
-                    window.location.href = '/';
-                    break;
-            }
-        }
-        
-        // Inicializar cuando carga la página
         window.addEventListener('load', () => {
-            tryOpenApp();
+            // Obtener el ID del servicio de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const servicioId = urlParams.get('id') || '123'; // 123 como fallback
+            
+            // Actualizar el display
+            document.querySelector('.service-id').textContent = `#${servicioId}`;
+            
+            // Intentar abrir la app con el servicio específico
+            setTimeout(() => {
+                window.location = `nubiraseguridad://servicio/${servicioId}`;
+            }, 1000);
+            
+            // Fallback para desarrollo - mostrar mensaje después de 3 segundos
+            setTimeout(() => {
+                document.querySelector('.container').innerHTML = `
+                    <div class="service-id">#${servicioId}</div>
+                    <h1>🔧 Servicio de Seguridad</h1>
+                    <p>La app aún no está disponible en las tiendas</p>
+                    <div style="margin-top: 30px;">
+                        <p style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                            📱 <strong>Para probar:</strong><br>
+                            Instala la app en modo desarrollo y presiona el enlace nuevamente
+                        </p>
+                        <a href="/" class="btn">🏠 Volver al inicio</a>
+                    </div>
+                `;
+            }, 3000);
         });
     </script>
 </head>
