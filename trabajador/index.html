@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubira Seguridad - Trabajador</title>
+    <meta name="description" content="Perfil de trabajador en la app de Nubira Seguridad">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Nubira Seguridad - Trabajador">
+    <meta property="og:description" content="Conoce a nuestros profesionales de seguridad verificados">
+    <meta property="og:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
+    <meta property="og:url" content="https://www.nubiraoficial.cl/trabajador/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nubira Seguridad - Trabajador">
+    <meta name="twitter:description" content="Conoce a nuestros profesionales de seguridad verificados">
+    <meta name="twitter:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/logoNUBIRA.png" type="image/png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-android {
+            background: #34A853;
+            color: white;
+        }
+        
+        .btn-android:hover {
+            background: #2d8f47;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 168, 83, 0.3);
+        }
+        
+        .btn-ios {
+            background: #007AFF;
+            color: white;
+        }
+        
+        .btn-ios:hover {
+            background: #0056cc;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 122, 255, 0.3);
+        }
+        
+        .btn-web {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-web:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+    <script>
+        // Obtener el ID del trabajador de la URL
+        function getWorkerId() {
+            const path = window.location.pathname;
+            const parts = path.split('/');
+            return parts[parts.length - 1] || 'unknown';
+        }
+        
+        // Detectar dispositivo
+        function getDeviceType() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.includes('android')) return 'android';
+            if (userAgent.includes('iphone') || userAgent.includes('ipad')) return 'ios';
+            return 'web';
+        }
+        
+        // Intentar abrir la app
+        function tryOpenApp() {
+            const workerId = getWorkerId();
+            const deviceType = getDeviceType();
+            
+            // Mostrar estado
+            document.getElementById('status').textContent = `Abriendo perfil de trabajador ${workerId}...`;
+            
+            // Intentar deep link
+            setTimeout(() => {
+                const deepLink = `nubiraseguridad://trabajador/${workerId}`;
+                
+                // Crear elemento invisible para el intento
+                const link = document.createElement('a');
+                link.href = deepLink;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                
+                try {
+                    link.click();
+                    document.getElementById('status').textContent = 'Redirigiendo a la app...';
+                } catch (e) {
+                    console.log('Deep link failed:', e);
+                }
+            }, 500);
+            
+            // Fallback a tienda después de 3 segundos
+            setTimeout(() => {
+                redirectToStore(deviceType);
+            }, 3000);
+        }
+        
+        // Redirigir a tienda
+        function redirectToStore(deviceType) {
+            switch (deviceType) {
+                case 'android':
+                    window.location.href = 'https://play.google.com/store/apps/details?id=com.nubira.seguridad';
+                    break;
+                case 'ios':
+                    window.location.href = 'https://apps.apple.com/app/nubira-seguridad/id123456789';
+                    break;
+                default:
+                    window.location.href = '/';
+                    break;
+            }
+        }
+        
+        // Inicializar cuando carga la página
+        window.addEventListener('load', () => {
+            tryOpenApp();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">👤</div>
+        <h1>Abriendo Perfil de Trabajador</h1>
+        <p class="subtitle">Te estamos redirigiendo al perfil del profesional...</p>
+        
+        <div class="spinner"></div>
+        
+        <div id="status" class="status">Preparando redirección...</div>
+        
+        <div class="buttons">
+            <a href="https://play.google.com/store/apps/details?id=com.nubira.seguridad" class="btn btn-android">
+                📱 Descargar para Android
+            </a>
+            <a href="https://apps.apple.com/app/nubira-seguridad/id123456789" class="btn btn-ios">
+                🍎 Descargar para iOS
+            </a>
+            <a href="/" class="btn btn-web">
+                🌐 Ir al sitio web
+            </a>
+        </div>
+    </div>
+</body>
+</html>

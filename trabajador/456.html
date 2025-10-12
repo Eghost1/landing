@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Mendoza - Guardia de Seguridad - Nubira</title>
+    <meta name="description" content="Perfil de Carlos Mendoza, guardia de seguridad profesional verificado en Nubira">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Carlos Mendoza - Guardia de Seguridad">
+    <meta property="og:description" content="5 años de experiencia, 4.9★ de calificación - Disponible ahora">
+    <meta property="og:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
+    <meta property="og:url" content="https://www.nubiraoficial.cl/trabajador/456">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/logoNUBIRA.png" type="image/png">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .worker-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .role {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .rating {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 10px;
+            background: #34A853;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-ios {
+            background: #007AFF;
+        }
+    </style>
+    
+    <script>
+        window.addEventListener('load', () => {
+            // Intentar abrir la app con el trabajador específico
+            setTimeout(() => {
+                window.location = 'nubiraseguridad://trabajador/456';
+            }, 1000);
+            
+            // Fallback después de 3 segundos
+            setTimeout(() => {
+                const userAgent = navigator.userAgent.toLowerCase();
+                if (userAgent.includes('android')) {
+                    window.location = 'https://play.google.com/store/apps/details?id=com.nubira.seguridad';
+                } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                    window.location = 'https://apps.apple.com/app/nubira-seguridad/id123456789';
+                } else {
+                    window.location = '/';
+                }
+            }, 3000);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="worker-avatar">CM</div>
+        <h1>Carlos Mendoza</h1>
+        <p class="role">Guardia de Seguridad Profesional</p>
+        <div class="rating">⭐⭐⭐⭐⭐ 4.9</div>
+        <p>5 años de experiencia • Verificado ✓</p>
+        
+        <div class="spinner"></div>
+        <p>Abriendo perfil en la app de Nubira...</p>
+        
+        <div style="margin-top: 30px;">
+            <a href="https://play.google.com/store/apps/details?id=com.nubira.seguridad" class="btn">
+                📱 Android
+            </a>
+            <a href="https://apps.apple.com/app/nubira-seguridad/id123456789" class="btn btn-ios">
+                🍎 iOS
+            </a>
+        </div>
+    </div>
+</body>
+</html>
