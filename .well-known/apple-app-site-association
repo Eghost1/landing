@@ -2,12 +2,10 @@
   "applinks": {
     "apps": [],
     "details": [{
-      "appID": "REPLACE_WITH_TEAM_ID.com.nubira.seguridad",
+      "appID": "TEMP_TEAM_ID.com.nubira.seguridad",
       "paths": [
         "/servicio/*",
-        "/trabajador/*",
-        "/service/*",
-        "/worker/*"
+        "/trabajador/*"
       ]
     }]
   }
