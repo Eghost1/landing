@@ -145,7 +145,7 @@
                         <li><a href="#contacto" class="nav-item">Contacto</a></li>
                     </ul>
                     <div class="nav-cta">
-                        <a href="#contacto" class="cta-button">¡Comenzar!</a>
+                        <a href="#contacto" class="cta-button" data-cta="comenzar" data-analytics="nav_cta_comenzar">¡Comenzar!</a>
                     </div>
                 </nav>
 
@@ -195,7 +195,7 @@
                     <!-- CTA Buttons -->
                     <div class="hero-buttons">
                         <div>
-                            <a href="#" class="cta-button-primary">
+                            <a href="#contacto" class="cta-button-primary" data-cta="agendar" data-analytics="hero_cta_agendar">
                                 <i data-feather="calendar" class="w-5 h-5"></i>
                                 <div>
                                     <p class="cta-subtitle">Buscar trabajadores</p>
@@ -204,7 +204,7 @@
                             </a>
                         </div>
                         <div>
-                            <a href="#" class="cta-button-secondary">
+                            <a href="#contacto" class="cta-button-secondary" data-cta="registrar" data-analytics="hero_cta_registrar">
                                 <i data-feather="user-check" class="w-5 h-5"></i>
                                 <div>
                                     <p class="cta-subtitle">Soy trabajador</p>
@@ -269,7 +269,7 @@
                         </div>
                     </div>
                     <div class="cta-right">
-                        <button class="cta-center-button" type="button">¡Comenzar en Nubira ahora!</button>
+                        <button class="cta-center-button" type="button" data-cta="comenzar" data-analytics="how_it_works_cta">¡Comenzar en Nubira ahora!</button>
                     </div>
                 </div>
             </div>
@@ -452,7 +452,7 @@
                     <input type="text" name="nombre" id="contact-nombre" placeholder="Tu nombre completo" required>
                     <input type="hidden" name="_captcha" value="false"> 
                     <input type="hidden" name="_subject" value="Nuevo contacto desde Nubira"> 
-                    <button type="submit" class="contact-submit-btn">¡Quiero comenzar con Nubira!</button>
+                    <button type="submit" class="contact-submit-btn" data-cta="contacto" data-analytics="form_submit_cta">¡Quiero comenzar con Nubira!</button>
                 </form>
 
                 <p class="contact-terms">
@@ -554,5 +554,8 @@
             }
         });
     </script>
+
+    <!-- Nubira Advanced Analytics -->
+    <script src="analytics-config.js"></script>
 </body>
 </html>

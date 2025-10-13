@@ -171,21 +171,77 @@
     </style>
     
     <script>
+        // Función de tracking para deep links de servicios
+        function trackDeepLinkEvent(type, id, action, additionalData = {}) {
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', `deeplink_${type}_${action}`, {
+                        event_category: 'deep_links',
+                        event_label: `${type}/${id}`,
+                        deeplink_type: type,
+                        deeplink_id: id,
+                        page_location: window.location.href,
+                        referrer: document.referrer,
+                        user_agent: navigator.userAgent,
+                        is_mobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent),
+                        timestamp: new Date().toISOString(),
+                        ...additionalData
+                    });
+                }
+                
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({
+                        event: `deeplink_${type}_${action}`,
+                        eventCategory: 'deep_links',
+                        eventAction: action,
+                        eventLabel: `${type}/${id}`,
+                        deeplinkType: type,
+                        deeplinkId: id,
+                        isMobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent),
+                        referrer: document.referrer,
+                        customData: additionalData
+                    });
+                }
+                
+                console.log(`📊 Deep Link Event: ${type}/${id} - ${action}`, additionalData);
+            } catch (error) {
+                console.error('Error tracking deep link:', error);
+            }
+        }
+
         window.addEventListener('load', () => {
             // Obtener el ID del servicio de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const servicioId = urlParams.get('id') || '123'; // 123 como fallback
+            const path = window.location.pathname;
+            const parts = path.split('/');
+            const servicioId = parts[2] || '123'; // Obtener de la URL o usar 123 como fallback
+            
+            // Track del acceso inicial al deep link
+            trackDeepLinkEvent('servicio', servicioId, 'access', {
+                access_time: Date.now(),
+                page_title: document.title
+            });
             
             // Actualizar el display
-            document.querySelector('.service-id').textContent = `#${servicioId}`;
+            if (document.querySelector('.service-id')) {
+                document.querySelector('.service-id').textContent = `#${servicioId}`;
+            }
             
             // Intentar abrir la app con el servicio específico
             setTimeout(() => {
+                trackDeepLinkEvent('servicio', servicioId, 'deeplink_attempt', {
+                    deep_link_url: `nubiraseguridad://servicio/${servicioId}`
+                });
+                
                 window.location = `nubiraseguridad://servicio/${servicioId}`;
             }, 1000);
             
-            // Fallback para desarrollo - mostrar mensaje después de 3 segundos
+            // Fallback para desarrollo y tracking
             setTimeout(() => {
+                trackDeepLinkEvent('servicio', servicioId, 'fallback_redirect', {
+                    fallback_reason: 'app_not_installed_or_timeout',
+                    wait_time: 3000
+                });
+                
                 document.querySelector('.container').innerHTML = `
                     <div class="service-id">#${servicioId}</div>
                     <h1>🔧 Servicio de Seguridad</h1>
@@ -195,9 +251,24 @@
                             📱 <strong>Para probar:</strong><br>
                             Instala la app en modo desarrollo y presiona el enlace nuevamente
                         </p>
-                        <a href="/" class="btn">🏠 Volver al inicio</a>
+                        <a href="/" class="btn" onclick="trackDeepLinkEvent('servicio', '${servicioId}', 'return_home_click')">🏠 Volver al inicio</a>
                     </div>
                 `;
+                
+                // Track clicks en botones de descarga después de actualizar el contenido
+                setTimeout(() => {
+                    document.querySelectorAll('.btn-android').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            trackDeepLinkEvent('servicio', servicioId, 'download_android_attempt');
+                        });
+                    });
+                    
+                    document.querySelectorAll('.btn-ios').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            trackDeepLinkEvent('servicio', servicioId, 'download_ios_attempt');
+                        });
+                    });
+                }, 100);
             }, 3000);
         });
     </script>
@@ -205,7 +276,7 @@
 <body>
     <div class="container">
         <div class="logo">🔧</div>
-        <h1>Abriendo Nubira Seguridad</h1>
+        <h1>Abriendo Nubira</h1>
         <p class="subtitle">Te estamos redirigiendo al servicio solicitado...</p>
         
         <div class="spinner"></div>

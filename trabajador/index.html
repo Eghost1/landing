@@ -171,18 +171,72 @@
     </style>
     
     <script>
+        // Función de tracking para deep links
+        function trackDeepLinkEvent(type, id, action, additionalData = {}) {
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', `deeplink_${type}_${action}`, {
+                        event_category: 'deep_links',
+                        event_label: `${type}/${id}`,
+                        deeplink_type: type,
+                        deeplink_id: id,
+                        page_location: window.location.href,
+                        referrer: document.referrer,
+                        user_agent: navigator.userAgent,
+                        is_mobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent),
+                        timestamp: new Date().toISOString(),
+                        ...additionalData
+                    });
+                }
+                
+                if (typeof dataLayer !== 'undefined') {
+                    dataLayer.push({
+                        event: `deeplink_${type}_${action}`,
+                        eventCategory: 'deep_links',
+                        eventAction: action,
+                        eventLabel: `${type}/${id}`,
+                        deeplinkType: type,
+                        deeplinkId: id,
+                        isMobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent),
+                        referrer: document.referrer,
+                        customData: additionalData
+                    });
+                }
+                
+                console.log(`📊 Deep Link Event: ${type}/${id} - ${action}`, additionalData);
+            } catch (error) {
+                console.error('Error tracking deep link:', error);
+            }
+        }
+
         window.addEventListener('load', () => {
             // Obtener el ID del trabajador de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const trabajadorId = urlParams.get('id') || '456'; // 456 como fallback
+            const path = window.location.pathname;
+            const parts = path.split('/');
+            const trabajadorId = parts[2] || '456'; // Obtener de la URL o usar 456 como fallback
+            
+            // Track del acceso inicial al deep link
+            trackDeepLinkEvent('trabajador', trabajadorId, 'access', {
+                access_time: Date.now(),
+                page_title: document.title
+            });
             
             // Intentar abrir la app con el trabajador específico
             setTimeout(() => {
+                trackDeepLinkEvent('trabajador', trabajadorId, 'deeplink_attempt', {
+                    deep_link_url: `nubiraseguridad://trabajador/${trabajadorId}`
+                });
+                
                 window.location = `nubiraseguridad://trabajador/${trabajadorId}`;
             }, 1000);
             
-            // Fallback para desarrollo
+            // Fallback para desarrollo y tracking
             setTimeout(() => {
+                trackDeepLinkEvent('trabajador', trabajadorId, 'fallback_redirect', {
+                    fallback_reason: 'app_not_installed_or_timeout',
+                    wait_time: 3000
+                });
+                
                 document.querySelector('.container').innerHTML = `
                     <div class="worker-avatar">T${trabajadorId}</div>
                     <h1>Trabajador #${trabajadorId}</h1>
@@ -193,9 +247,24 @@
                             📱 <strong>Para probar:</strong><br>
                             Instala la app en modo desarrollo y presiona el enlace nuevamente
                         </p>
-                        <a href="/" class="btn">🏠 Volver al inicio</a>
+                        <a href="/" class="btn" onclick="trackDeepLinkEvent('trabajador', '${trabajadorId}', 'return_home_click')">🏠 Volver al inicio</a>
                     </div>
                 `;
+                
+                // Track clicks en botones de descarga después de actualizar el contenido
+                setTimeout(() => {
+                    document.querySelectorAll('.btn-android').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            trackDeepLinkEvent('trabajador', trabajadorId, 'download_android_attempt');
+                        });
+                    });
+                    
+                    document.querySelectorAll('.btn-ios').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            trackDeepLinkEvent('trabajador', trabajadorId, 'download_ios_attempt');
+                        });
+                    });
+                }, 100);
             }, 3000);
         });
     </script>

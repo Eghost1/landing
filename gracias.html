@@ -213,8 +213,25 @@
                     'event_category': 'Contact',
                     'event_label': 'Form Submitted'
                 });
+                
+                // Evento de conversión mejorado
+                gtag('event', 'purchase', {
+                    'transaction_id': Date.now(),
+                    'value': 1.00,
+                    'currency': 'CLP',
+                    'items': [{
+                        'item_id': 'contact_form_submission',
+                        'item_name': 'Formulario de Contacto Completado',
+                        'category': 'Lead Generation',
+                        'quantity': 1,
+                        'price': 1.00
+                    }]
+                });
             }
         });
     </script>
+
+    <!-- Nubira Advanced Analytics -->
+    <script src="analytics-config.js"></script>
 </body>
 </html>
