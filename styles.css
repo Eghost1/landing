@@ -468,6 +468,12 @@ body.menu-open {
     margin: 0;
 }
 
+/* Color blanco para subtitle en botón primario */
+.cta-button-primary .cta-subtitle {
+    color: white;
+    opacity: 0.9;
+}
+
 .cta-title {
     font-size: 1rem;
     font-weight: 600;
