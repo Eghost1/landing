@@ -53,7 +53,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/logoNUBIRA.png" />
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gracias-styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -98,38 +98,154 @@
 
     <!-- Thank You Section -->
     <section class="thank-you-section">
+        <!-- Background Pattern - Consistente con Index -->
+        <svg aria-hidden="true" class="absolute inset-0 -z-10 h-full w-full stroke-primary/10 hero-pattern">
+            <defs>
+                <pattern x="50%" y="-1" id="pattern-bg-thanks" width="200" height="200" patternUnits="userSpaceOnUse">
+                    <path d="m0 200 200-200M0 0l200 200" stroke-width="1"></path>
+                </pattern>
+            </defs>
+            <rect fill="url(#pattern-bg-thanks)" width="100%" height="100%" stroke-width="0"></rect>
+        </svg>
+        
+        <!-- Gradient Background -->
+        <div aria-hidden="true" class="absolute left-calc top-10 -z-10 transform-gpu blur-3xl">
+            <div class="gradient-blob"></div>
+        </div>
+        
+        <!-- Background Elements -->
+        <div class="thank-you-bg-elements">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        
         <div class="w-full max-w-screen-xl mx-auto px-5">
             <div class="thank-you-content">
-                <div class="thank-you-icon">
-                    <i data-feather="check-circle"></i>
-                </div>
-                <h1>¡Gracias por tu interés en Nubira!</h1>
-                <p class="lead">Hemos recibido tu información correctamente. Nuestro equipo de Nubira se pondrá en contacto contigo muy pronto para acompañarte en tu experiencia con trabajadores verificados.</p>
-                
-                <div class="next-steps">
-                    <h3>¿Qué sigue ahora con Nubira?</h3>
-                    <div class="steps-grid">
-                        <div class="step-card">
-                            <div class="step-number">1</div>
-                            <h4>Revisaremos tu información en Nubira</h4>
-                            <p>Nuestro equipo de Nubira analizará tus necesidades específicas en un plazo de 24 horas.</p>
-                        </div>
-                        <div class="step-card">
-                            <div class="step-number">2</div>
-                            <h4>Te contactaremos desde Nubira</h4>
-                            <p>Un especialista de Nubira se comunicará contigo para agendar una consulta personalizada.</p>
-                        </div>
-                        <div class="step-card">
-                            <div class="step-number">3</div>
-                            <h4>Demo personalizada de Nubira</h4>
-                            <p>Te mostraremos cómo Nubira puede optimizar la gestión de tus servicios con trabajadores verificados.</p>
+                <!-- Success Badge - Consistente con Index -->
+                <div class="thank-you-animation">
+                    <div class="hero-badge">
+                        <span class="badge-text">
+                            <i data-feather="check-circle"></i>
+                            ¡Formulario enviado exitosamente!
+                        </span>
+                    </div>
+                    <div class="success-checkmark">
+                        <div class="check-icon">
+                            <span class="icon-line line-tip"></span>
+                            <span class="icon-line line-long"></span>
+                            <div class="icon-circle"></div>
+                            <div class="icon-fix"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cta-actions">
-                    <a href="index.html" class="btn btn-primary">Volver al inicio de Nubira</a>
-                    <a href="index.html#caracteristicas" class="btn btn-outline">Explorar funcionalidades de Nubira</a>
+                <h1 class="thank-you-title">
+                    <span class="title-main">¡Gracias por tu interés</span>
+                    <span class="title-highlight">en Nubira!</span>
+                </h1>
+                
+                <p class="lead-enhanced">
+                    <span class="highlight-text">¡Perfecto!</span> Hemos recibido tu información correctamente. 
+                    Nuestro equipo especializado de Nubira se pondrá en contacto contigo muy pronto para 
+                    acompañarte en tu experiencia con <strong>trabajadores verificados</strong>.
+                </p>
+                
+                <!-- Stats Counter -->
+                <div class="stats-counter">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-label">Horas máximo<br>de respuesta</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">Clientes<br>satisfechos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1000">0</div>
+                        <div class="stat-label">Trabajadores<br>verificados</div>
+                    </div>
+                </div>
+
+                <div class="next-steps">
+                    <h3 class="steps-title">
+                        <i data-feather="map" class="steps-icon"></i>
+                        ¿Qué sigue ahora con Nubira?
+                    </h3>
+                    <div class="steps-timeline">
+                        <div class="step-card enhanced">
+                            <div class="step-icon">
+                                <i data-feather="search"></i>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-number">01</div>
+                                <h4>Análisis personalizado</h4>
+                                <p>Nuestro equipo de Nubira analizará tus necesidades específicas y te asignará un consultor especializado.</p>
+                                <div class="step-time">
+                                    <i data-feather="clock"></i>
+                                    <span>24 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card enhanced">
+                            <div class="step-icon">
+                                <i data-feather="phone-call"></i>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-number">02</div>
+                                <h4>Consulta estratégica</h4>
+                                <p>Un especialista certificado de Nubira te contactará para agendar una consulta completamente personalizada.</p>
+                                <div class="step-time">
+                                    <i data-feather="clock"></i>
+                                    <span>48 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card enhanced">
+                            <div class="step-icon">
+                                <i data-feather="play-circle"></i>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-number">03</div>
+                                <h4>Demo interactiva</h4>
+                                <p>Descubre en tiempo real cómo Nubira revolucionará la gestión de tus servicios con trabajadores verificados.</p>
+                                <div class="step-time">
+                                    <i data-feather="clock"></i>
+                                    <span>30 minutos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced CTAs -->
+                <div class="cta-actions-enhanced">
+                    <a href="index.html" class="btn btn-primary enhanced" data-cta-location="thank-you" data-cta-type="primary">
+                        <i data-feather="home"></i>
+                        <span>Volver al inicio de Nubira</span>
+                    </a>
+                    <a href="index.html#caracteristicas" class="btn btn-outline enhanced" data-cta-location="thank-you" data-cta-type="secondary">
+                        <i data-feather="layers"></i>
+                        <span>Explorar funcionalidades</span>
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <i data-feather="shield-check"></i>
+                        <span>100% Seguro</span>
+                    </div>
+                    <div class="trust-item">
+                        <i data-feather="award"></i>
+                        <span>Trabajadores Verificados</span>
+                    </div>
+                    <div class="trust-item">
+                        <i data-feather="clock"></i>
+                        <span>Respuesta Garantizada</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -228,6 +344,66 @@
                     }]
                 });
             }
+
+            // Animación de contador
+            function animateCounters() {
+                const counters = document.querySelectorAll('.stat-number[data-target]');
+                
+                const observerOptions = {
+                    threshold: 0.7
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const counter = entry.target;
+                            const target = parseInt(counter.getAttribute('data-target'));
+                            let count = 0;
+                            const increment = target / 100;
+                            
+                            const timer = setInterval(() => {
+                                count += increment;
+                                if (count >= target) {
+                                    counter.textContent = target + (target >= 100 ? '+' : '');
+                                    clearInterval(timer);
+                                } else {
+                                    counter.textContent = Math.ceil(count);
+                                }
+                            }, 20);
+                            
+                            observer.unobserve(counter);
+                        }
+                    });
+                }, observerOptions);
+                
+                counters.forEach(counter => observer.observe(counter));
+            }
+
+            // Efectos de entrada escalonados
+            function staggeredAnimations() {
+                const elements = document.querySelectorAll('.step-card.enhanced');
+                elements.forEach((el, index) => {
+                    el.style.animationDelay = `${index * 0.2}s`;
+                    el.classList.add('animate-in');
+                });
+            }
+
+            // Inicializar animaciones
+            setTimeout(() => {
+                animateCounters();
+                staggeredAnimations();
+            }, 1000);
+
+            // Efecto hover mejorado para botones
+            document.querySelectorAll('.btn.enhanced').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
         });
     </script>
 

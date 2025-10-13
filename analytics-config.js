@@ -63,20 +63,23 @@ const NubiraAnalytics = {
 // Función principal para enviar eventos
 function trackEvent(eventName, parameters = {}) {
     try {
-        // Enviar a GA4
+        // Configurar parámetros básicos
+        const baseParams = {
+            event_category: parameters.category || 'engagement',
+            event_label: parameters.label || '',
+            value: parameters.value || 0,
+            page_location: window.location.href,
+            page_title: document.title,
+            timestamp: new Date().toISOString(),
+            ...parameters
+        };
+
+        // Enviar a GA4 - Formato simplificado
         if (typeof gtag !== 'undefined') {
-            gtag('event', eventName, {
-                event_category: parameters.category || 'engagement',
-                event_label: parameters.label || '',
-                value: parameters.value || 0,
-                custom_parameter_1: parameters.custom_1 || '',
-                custom_parameter_2: parameters.custom_2 || '',
-                page_location: window.location.href,
-                page_title: document.title,
-                timestamp: new Date().toISOString(),
-                user_agent: navigator.userAgent,
-                ...parameters
-            });
+            gtag('event', eventName, baseParams);
+            console.log(`✅ GA4 Event sent: ${eventName}`, baseParams);
+        } else {
+            console.warn('⚠️ gtag no disponible');
         }
         
         // Enviar a GTM dataLayer
@@ -87,14 +90,23 @@ function trackEvent(eventName, parameters = {}) {
                 eventAction: parameters.action || eventName,
                 eventLabel: parameters.label || '',
                 eventValue: parameters.value || 0,
-                customParameters: parameters,
-                timestamp: Date.now()
+                timestamp: Date.now(),
+                ...parameters
             });
+            console.log(`✅ GTM Event sent: ${eventName}`);
+        } else {
+            console.warn('⚠️ dataLayer no disponible');
         }
         
-        console.log(`📊 Analytics Event: ${eventName}`, parameters);
+        // Debug info
+        console.log(`📊 Analytics Event: ${eventName}`, {
+            gtag_available: typeof gtag !== 'undefined',
+            dataLayer_available: typeof dataLayer !== 'undefined',
+            parameters: baseParams
+        });
+        
     } catch (error) {
-        console.error('Error enviando evento de analytics:', error);
+        console.error('❌ Error enviando evento de analytics:', error);
     }
 }
 
@@ -369,35 +381,65 @@ function getSocialPlatform(url) {
 // =============================================================================
 
 function initializeNubiraAnalytics() {
-    // Esperar a que GA4 y GTM estén cargados
-    if (typeof gtag === 'undefined' || typeof dataLayer === 'undefined') {
-        setTimeout(initializeNubiraAnalytics, 500);
-        return;
+    let attempts = 0;
+    const maxAttempts = 20; // 10 segundos máximo
+    
+    function tryInit() {
+        attempts++;
+        
+        // Verificar disponibilidad con más flexibilidad
+        const gtagReady = typeof gtag !== 'undefined';
+        const dataLayerReady = typeof dataLayer !== 'undefined';
+        
+        console.log(`🔄 Intento ${attempts}: gtag=${gtagReady}, dataLayer=${dataLayerReady}`);
+        
+        if (gtagReady || dataLayerReady || attempts >= maxAttempts) {
+            console.log('🚀 Iniciando Nubira Analytics...');
+            console.log(`📊 Estado inicial:`, {
+                gtag_available: gtagReady,
+                dataLayer_available: dataLayerReady,
+                page_url: window.location.href,
+                page_title: document.title
+            });
+            
+            // Configurar todos los trackings
+            setupCTATracking();
+            setupNavigationTracking();
+            setupFormTracking();
+            setupEngagementTracking();
+            setupDeepLinkTracking();
+            
+            // Evento de página vista INMEDIATO y simple
+            trackEvent('page_view', {
+                category: 'navigation',
+                action: 'page_view',
+                label: document.title,
+                page_type: getPageType()
+            });
+            
+            // Evento de página vista mejorado después de 1 segundo
+            setTimeout(() => {
+                trackEvent('page_view_enhanced', {
+                    category: 'page_interaction',
+                    action: 'page_view_detailed',
+                    label: document.title,
+                    page_type: getPageType(),
+                    page_language: document.documentElement.lang || 'es',
+                    viewport_width: window.innerWidth,
+                    viewport_height: window.innerHeight,
+                    screen_resolution: `${screen.width}x${screen.height}`,
+                    device_type: getDeviceType(),
+                    user_agent_mobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent)
+                });
+            }, 1000);
+            
+            console.log('✅ Nubira Analytics inicializado correctamente');
+        } else {
+            setTimeout(tryInit, 500);
+        }
     }
     
-    console.log('🚀 Iniciando Nubira Analytics...');
-    
-    // Configurar todos los trackings
-    setupCTATracking();
-    setupNavigationTracking();
-    setupFormTracking();
-    setupEngagementTracking();
-    setupDeepLinkTracking();
-    
-    // Evento de página vista mejorado
-    trackEvent('page_view_enhanced', {
-        category: 'page_interaction',
-        action: 'page_view',
-        label: document.title,
-        page_type: getPageType(),
-        page_language: document.documentElement.lang || 'es',
-        viewport_width: window.innerWidth,
-        viewport_height: window.innerHeight,
-        screen_resolution: `${screen.width}x${screen.height}`,
-        device_type: getDeviceType()
-    });
-    
-    console.log('✅ Nubira Analytics inicializado correctamente');
+    tryInit();
 }
 
 function getPageType() {

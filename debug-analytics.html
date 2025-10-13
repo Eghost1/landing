@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SWXSF3D6YS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SWXSF3D6YS');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WDTVWF7C');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Analytics - Nubira</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 2rem auto; 
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .debug-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .status {
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        button {
+            background: #6c3eb4;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+        button:hover { background: #5a2d8f; }
+        #console-output {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDTVWF7C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <h1>🔍 Debug Analytics - Nubira</h1>
+    
+    <div class="debug-panel">
+        <h2>Estado del Sistema</h2>
+        <div id="system-status"></div>
+    </div>
+
+    <div class="debug-panel">
+        <h2>Pruebas de Eventos</h2>
+        <button onclick="testPageView()">📄 Test Page View</button>
+        <button onclick="testCTAClick()">🔘 Test CTA Click</button>
+        <button onclick="testNavigation()">🧭 Test Navigation</button>
+        <button onclick="testDeepLink()">🔗 Test Deep Link</button>
+        <button onclick="testFormEvent()">📝 Test Form Event</button>
+        <button onclick="testScrollEvent()">📜 Test Scroll Event</button>
+        <button onclick="clearConsole()">🗑️ Limpiar Console</button>
+    </div>
+
+    <div class="debug-panel">
+        <h2>Console Output</h2>
+        <div id="console-output"></div>
+    </div>
+
+    <script>
+        // Capturar console.log
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const consoleOutput = document.getElementById('console-output');
+
+        function addToConsole(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : '📝';
+            consoleOutput.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole(args.join(' '), 'log');
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToConsole(args.join(' '), 'warn');
+        };
+
+        function updateSystemStatus() {
+            const status = document.getElementById('system-status');
+            const gtagAvailable = typeof gtag !== 'undefined';
+            const dataLayerAvailable = typeof dataLayer !== 'undefined';
+            const analyticsAvailable = typeof NubiraAnalytics !== 'undefined';
+
+            let html = '';
+            
+            html += `<div class="status ${gtagAvailable ? 'success' : 'error'}">
+                Google Analytics (gtag): ${gtagAvailable ? '✅ Disponible' : '❌ No disponible'}
+            </div>`;
+            
+            html += `<div class="status ${dataLayerAvailable ? 'success' : 'error'}">
+                Google Tag Manager (dataLayer): ${dataLayerAvailable ? '✅ Disponible' : '❌ No disponible'}
+            </div>`;
+            
+            html += `<div class="status ${analyticsAvailable ? 'success' : 'warning'}">
+                Nubira Analytics: ${analyticsAvailable ? '✅ Inicializado' : '⏳ Cargando...'}
+            </div>`;
+
+            html += `<div class="status info">
+                Página actual: ${window.location.pathname}<br>
+                Título: ${document.title}<br>
+                User Agent: ${navigator.userAgent.includes('Mobile') ? '📱 Mobile' : '💻 Desktop'}
+            </div>`;
+
+            status.innerHTML = html;
+        }
+
+        // Funciones de prueba
+        function testPageView() {
+            console.log('🧪 Probando evento page_view...');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view_test', {
+                    event_category: 'debug',
+                    event_label: 'Manual Test',
+                    page_location: window.location.href,
+                    page_title: document.title
+                });
+                console.log('✅ Evento page_view_test enviado');
+            } else {
+                console.error('❌ gtag no disponible');
+            }
+        }
+
+        function testCTAClick() {
+            console.log('🧪 Probando evento CTA click...');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cta_test_click', {
+                    event_category: 'cta_conversion',
+                    event_label: 'Test Button',
+                    value: 1
+                });
+                console.log('✅ Evento cta_test_click enviado');
+            } else {
+                console.error('❌ gtag no disponible');
+            }
+        }
+
+        function testNavigation() {
+            console.log('🧪 Probando evento navigation...');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'navigation_test', {
+                    event_category: 'navigation',
+                    event_label: 'Test Navigation'
+                });
+                console.log('✅ Evento navigation_test enviado');
+            }
+        }
+
+        function testDeepLink() {
+            console.log('🧪 Probando evento deep link...');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'deeplink_test', {
+                    event_category: 'deep_links',
+                    event_label: 'servicio/123',
+                    deeplink_type: 'servicio',
+                    deeplink_id: '123'
+                });
+                console.log('✅ Evento deeplink_test enviado');
+            }
+        }
+
+        function testFormEvent() {
+            console.log('🧪 Probando evento form...');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_test', {
+                    event_category: 'form_interaction',
+                    event_label: 'Test Form'
+                });
+                console.log('✅ Evento form_test enviado');
+            }
+        }
+
+        function testScrollEvent() {
+            console.log('🧪 Probando evento scroll...');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'scroll_test', {
+                    event_category: 'engagement',
+                    event_label: '50%',
+                    scroll_percentage: 50
+                });
+                console.log('✅ Evento scroll_test enviado');
+            }
+        }
+
+        function clearConsole() {
+            consoleOutput.textContent = '';
+        }
+
+        // Actualizar estado cada 2 segundos
+        setInterval(updateSystemStatus, 2000);
+        updateSystemStatus();
+
+        // Log inicial
+        console.log('🔍 Debug Analytics iniciado');
+        console.log('📊 Verificando Google Analytics en tiempo real...');
+    </script>
+
+    <!-- Nubira Advanced Analytics -->
+    <script src="analytics-config.js"></script>
+</body>
+</html>
