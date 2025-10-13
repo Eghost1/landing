@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA4 Multi-Page Test - Nubira</title>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SWXSF3D6YS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SWXSF3D6YS');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WDTVWF7C');</script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f1b0b7;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #b8daff;
+        }
+        .test-button {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #2c5282;
+        }
+        .page-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .page-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .page-card a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .page-card a:hover {
+            text-decoration: underline;
+        }
+        .log-area {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDTVWF7C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="container">
+        <h1>🔍 GA4 Multi-Page Tracking Test</h1>
+        <p style="text-align: center; color: #666;">Herramienta de diagnóstico para verificar que todas las páginas aparezcan en Google Analytics</p>
+
+        <div class="test-section">
+            <h3>📊 Estado de Analytics</h3>
+            <div id="analytics-status"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🌐 Páginas del Sitio</h3>
+            <p>Visita cada página para verificar que aparezcan en GA4:</p>
+            <div class="page-list">
+                <div class="page-card">
+                    <a href="index.html" target="_blank">🏠 Página Principal</a>
+                    <p>/index.html</p>
+                </div>
+                <div class="page-card">
+                    <a href="nosotros.html" target="_blank">👥 Nosotros</a>
+                    <p>/nosotros.html</p>
+                </div>
+                <div class="page-card">
+                    <a href="gracias.html" target="_blank">🙏 Gracias</a>
+                    <p>/gracias.html</p>
+                </div>
+                <div class="page-card">
+                    <a href="servicio/index.html" target="_blank">🔧 Servicio</a>
+                    <p>/servicio/</p>
+                </div>
+                <div class="page-card">
+                    <a href="trabajador/index.html" target="_blank">👷 Trabajador</a>
+                    <p>/trabajador/</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Tests de Tracking</h3>
+            <button class="test-button" onclick="testPageView()">Test Page View</button>
+            <button class="test-button" onclick="testCustomEvent()">Test Custom Event</button>
+            <button class="test-button" onclick="testDataLayer()">Test DataLayer</button>
+            <button class="test-button" onclick="clearLog()">Limpiar Log</button>
+        </div>
+
+        <div class="test-section">
+            <h3>📝 Log de Eventos</h3>
+            <div id="event-log" class="log-area"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 Instrucciones</h3>
+            <ol>
+                <li><strong>Verificar Analytics:</strong> Confirma que GA4 y GTM están cargados correctamente</li>
+                <li><strong>Visitar Páginas:</strong> Haz clic en cada página del sitio web</li>
+                <li><strong>Probar Eventos:</strong> Usa los botones de test para enviar eventos</li>
+                <li><strong>Verificar en GA4:</strong> Ve a Google Analytics → Informes → Tiempo real para ver las páginas</li>
+                <li><strong>Esperar Datos:</strong> Los datos pueden tardar hasta 24-48 horas en aparecer en informes estándar</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        let eventCounter = 0;
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logElement = document.getElementById('event-log');
+            const color = type === 'error' ? '#ff6b6b' : type === 'success' ? '#51cf66' : '#74c0fc';
+            
+            logElement.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            logElement.scrollTop = logElement.scrollHeight;
+            
+            // También log en consola
+            console.log(message);
+        }
+
+        function checkAnalyticsStatus() {
+            const gtagAvailable = typeof gtag !== 'undefined';
+            const dataLayerAvailable = typeof dataLayer !== 'undefined';
+            
+            let html = '';
+            html += `<div class="status ${gtagAvailable ? 'success' : 'error'}">
+                Google Analytics 4 (gtag): ${gtagAvailable ? '✅ Disponible' : '❌ No disponible'}
+            </div>`;
+            html += `<div class="status ${dataLayerAvailable ? 'success' : 'error'}">
+                Google Tag Manager (dataLayer): ${dataLayerAvailable ? '✅ Disponible' : '❌ No disponible'}
+            </div>`;
+            
+            const currentPage = window.location.pathname;
+            html += `<div class="status info">
+                Página Actual: ${currentPage}
+            </div>`;
+            
+            document.getElementById('analytics-status').innerHTML = html;
+            
+            log(`Analytics Status Check - gtag: ${gtagAvailable}, dataLayer: ${dataLayerAvailable}, page: ${currentPage}`);
+        }
+
+        function testPageView() {
+            eventCounter++;
+            const eventData = {
+                page_title: `Test Page View ${eventCounter}`,
+                page_location: window.location.href,
+                page_path: window.location.pathname,
+                test_id: eventCounter,
+                timestamp: new Date().toISOString()
+            };
+
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view_test', eventData);
+                log(`✅ Test Page View ${eventCounter} enviado via gtag`, 'success');
+            } else {
+                log(`❌ gtag no disponible para Test Page View ${eventCounter}`, 'error');
+            }
+
+            if (typeof dataLayer !== 'undefined') {
+                dataLayer.push({
+                    event: 'test_page_view',
+                    ...eventData
+                });
+                log(`✅ Test Page View ${eventCounter} enviado via dataLayer`, 'success');
+            } else {
+                log(`❌ dataLayer no disponible para Test Page View ${eventCounter}`, 'error');
+            }
+        }
+
+        function testCustomEvent() {
+            eventCounter++;
+            const eventData = {
+                event_category: 'test',
+                event_action: 'button_click',
+                event_label: `Test Event ${eventCounter}`,
+                value: eventCounter,
+                timestamp: new Date().toISOString()
+            };
+
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'test_custom_event', eventData);
+                log(`✅ Custom Event ${eventCounter} enviado via gtag`, 'success');
+            }
+
+            if (typeof dataLayer !== 'undefined') {
+                dataLayer.push({
+                    event: 'test_custom_event',
+                    ...eventData
+                });
+                log(`✅ Custom Event ${eventCounter} enviado via dataLayer`, 'success');
+            }
+        }
+
+        function testDataLayer() {
+            if (typeof dataLayer !== 'undefined') {
+                log(`DataLayer Content: ${JSON.stringify(dataLayer.slice(-5), null, 2)}`);
+            } else {
+                log(`❌ dataLayer no disponible`, 'error');
+            }
+        }
+
+        function clearLog() {
+            document.getElementById('event-log').innerHTML = '';
+            eventCounter = 0;
+            log('Log limpiado - Contador de eventos reiniciado');
+        }
+
+        // Inicializar cuando se carga la página
+        window.addEventListener('load', function() {
+            setTimeout(checkAnalyticsStatus, 2000);
+            log('🚀 GA4 Multi-Page Test iniciado');
+            log('📊 Para verificar los datos, ve a Google Analytics → Informes → Tiempo real');
+        });
+
+        // Capturar errores
+        window.addEventListener('error', function(e) {
+            log(`❌ JavaScript Error: ${e.message}`, 'error');
+        });
+
+        // Debug de dataLayer changes
+        if (typeof dataLayer !== 'undefined') {
+            const originalPush = dataLayer.push;
+            dataLayer.push = function(...args) {
+                log(`📊 DataLayer Push: ${JSON.stringify(args[0])}`);
+                return originalPush.apply(this, args);
+            };
+        }
+    </script>
+
+    <!-- Incluir nuestros scripts de analytics -->
+    <script src="analytics-config.js"></script>
+    <script src="ga4-page-fix.js"></script>
+</body>
+</html>

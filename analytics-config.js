@@ -409,29 +409,26 @@ function initializeNubiraAnalytics() {
             setupEngagementTracking();
             setupDeepLinkTracking();
             
-            // Evento de página vista INMEDIATO y simple
-            trackEvent('page_view', {
-                category: 'navigation',
-                action: 'page_view',
-                label: document.title,
-                page_type: getPageType()
-            });
+            // IMPORTANTE: GA4 ya envía page_view automáticamente con gtag('config')
+            // Solo enviamos eventos de tracking adicionales, NO page_view duplicados
             
-            // Evento de página vista mejorado después de 1 segundo
+            // Enviar evento de sesión de página para tracking mejorado
             setTimeout(() => {
-                trackEvent('page_view_enhanced', {
-                    category: 'page_interaction',
-                    action: 'page_view_detailed',
+                trackEvent('nubira_page_session', {
+                    category: 'page_engagement',
+                    action: 'page_loaded',
                     label: document.title,
+                    page_path: window.location.pathname,
                     page_type: getPageType(),
                     page_language: document.documentElement.lang || 'es',
                     viewport_width: window.innerWidth,
                     viewport_height: window.innerHeight,
                     screen_resolution: `${screen.width}x${screen.height}`,
                     device_type: getDeviceType(),
-                    user_agent_mobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent)
+                    user_agent_mobile: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent),
+                    referrer: document.referrer || 'direct'
                 });
-            }, 1000);
+            }, 1500);
             
             console.log('✅ Nubira Analytics inicializado correctamente');
         } else {

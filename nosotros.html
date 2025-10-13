@@ -202,7 +202,6 @@
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">Valentina Cruces</h3>
-                        <p class="team-role">labor</p>
                         <p class="team-description">
                             Líder visionaria con experiencia en desarrollo de productos tecnológicos y gestión empresarial.
                         </p>
@@ -215,7 +214,6 @@
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">Diego Bravo</h3>
-                        <p class="team-role">labor</p>
                         <p class="team-description">
                             Experto en desarrollo full-stack con especialización en aplicaciones móviles y web escalables.
                         </p>
@@ -228,7 +226,6 @@
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">Jeremías Sanhueza</h3>
-                        <p class="team-role">labor</p>
                         <p class="team-description">
                             Especialista en arquitectura de sistemas y bases de datos, enfocado en la seguridad y escalabilidad.
                         </p>
@@ -241,7 +238,6 @@
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">José Chavéz</h3>
-                        <p class="team-role">labor</p>
                         <p class="team-description">
                             Creativo especializado en experiencia de usuario y diseño de interfaces intuitivas y atractivas.
                         </p>
@@ -344,18 +340,13 @@
                 });
             }
             
-            // Analytics tracking para conversión
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'page_view', {
-                    'event_category': 'About',
-                    'event_label': 'Nosotros Page',
-                    'page_location': window.location.href
-                });
-            }
+            // No necesitamos tracking manual de page_view aquí
+            // analytics-config.js maneja automáticamente todos los page_view
         });
     </script>
 
     <!-- Nubira Advanced Analytics -->
     <script src="analytics-config.js"></script>
+    <script src="ga4-page-fix.js"></script>
 </body>
 </html>
