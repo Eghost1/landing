@@ -21,20 +21,20 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nubira Seguridad - Servicio</title>
-    <meta name="description" content="Accede al servicio en la app de Nubira Seguridad")
+    <title>Nubira Seguridad - Trabajador</title>
+    <meta name="description" content="Perfil de trabajador en la app de Nubira Seguridad">
     
     <!-- Open Graph para redes sociales -->
-    <meta property="og:title" content="Nubira Seguridad - Servicio">
-    <meta property="og:description" content="Conecta con profesionales de seguridad verificados">
+    <meta property="og:title" content="Nubira Seguridad - Trabajador">
+    <meta property="og:description" content="Conoce a nuestros profesionales de seguridad verificados">
     <meta property="og:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
-    <meta property="og:url" content="https://www.nubiraoficial.cl/servicio/">
+    <meta property="og:url" content="https://www.nubiraoficial.cl/trabajador/">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nubira Seguridad - Servicio">
-    <meta name="twitter:description" content="Conecta con profesionales de seguridad verificados">
+    <meta name="twitter:title" content="Nubira Seguridad - Trabajador">
+    <meta name="twitter:description" content="Conoce a nuestros profesionales de seguridad verificados">
     <meta name="twitter:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
     
     <!-- Favicon -->
@@ -49,7 +49,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -81,7 +81,7 @@
             justify-content: center;
             font-size: 24px;
             font-weight: bold;
-            color: #667eea;
+            color: #764ba2;
         }
         
         h1 {
@@ -189,7 +189,7 @@
     </style>
     
     <script>
-        // Función de tracking para deep links de servicios
+        // Función de tracking para deep links
         function trackDeepLinkEvent(type, id, action, additionalData = {}) {
             try {
                 if (typeof gtag !== 'undefined') {
@@ -228,48 +228,44 @@
         }
 
         window.addEventListener('load', () => {
-            // Obtener el ID del servicio de la URL
+            // Obtener el ID del trabajador de la URL
             const path = window.location.pathname;
             const parts = path.split('/');
-            const servicioId = parts[2] || '123'; // Obtener de la URL o usar 123 como fallback
+            const trabajadorId = parts[2] || '456'; // Obtener de la URL o usar 456 como fallback
             
             // Track del acceso inicial al deep link
-            trackDeepLinkEvent('servicio', servicioId, 'access', {
+            trackDeepLinkEvent('trabajador', trabajadorId, 'access', {
                 access_time: Date.now(),
                 page_title: document.title
             });
             
-            // Actualizar el display
-            if (document.querySelector('.service-id')) {
-                document.querySelector('.service-id').textContent = `#${servicioId}`;
-            }
-            
-            // Intentar abrir la app con el servicio específico
+            // Intentar abrir la app con el trabajador específico
             setTimeout(() => {
-                trackDeepLinkEvent('servicio', servicioId, 'deeplink_attempt', {
-                    deep_link_url: `nubiraseguridad://servicio/${servicioId}`
+                trackDeepLinkEvent('trabajador', trabajadorId, 'deeplink_attempt', {
+                    deep_link_url: `nubiraseguridad://trabajador/${trabajadorId}`
                 });
                 
-                window.location = `nubiraseguridad://servicio/${servicioId}`;
+                window.location = `nubiraseguridad://trabajador/${trabajadorId}`;
             }, 1000);
             
             // Fallback para desarrollo y tracking
             setTimeout(() => {
-                trackDeepLinkEvent('servicio', servicioId, 'fallback_redirect', {
+                trackDeepLinkEvent('trabajador', trabajadorId, 'fallback_redirect', {
                     fallback_reason: 'app_not_installed_or_timeout',
                     wait_time: 3000
                 });
                 
                 document.querySelector('.container').innerHTML = `
-                    <div class="service-id">#${servicioId}</div>
-                    <h1>🔧 Servicio de Seguridad</h1>
+                    <div class="worker-avatar">T${trabajadorId}</div>
+                    <h1>Trabajador #${trabajadorId}</h1>
+                    <p class="role">Profesional de Seguridad</p>
                     <p>La app aún no está disponible en las tiendas</p>
                     <div style="margin-top: 30px;">
                         <p style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
                             📱 <strong>Para probar:</strong><br>
                             Instala la app en modo desarrollo y presiona el enlace nuevamente
                         </p>
-                        <a href="/" class="btn" onclick="trackDeepLinkEvent('servicio', '${servicioId}', 'return_home_click')">🏠 Volver al inicio</a>
+                        <a href="/" class="btn" onclick="trackDeepLinkEvent('trabajador', '${trabajadorId}', 'return_home_click')">🏠 Volver al inicio</a>
                     </div>
                 `;
                 
@@ -277,13 +273,13 @@
                 setTimeout(() => {
                     document.querySelectorAll('.btn-android').forEach(btn => {
                         btn.addEventListener('click', () => {
-                            trackDeepLinkEvent('servicio', servicioId, 'download_android_attempt');
+                            trackDeepLinkEvent('trabajador', trabajadorId, 'download_android_attempt');
                         });
                     });
                     
                     document.querySelectorAll('.btn-ios').forEach(btn => {
                         btn.addEventListener('click', () => {
-                            trackDeepLinkEvent('servicio', servicioId, 'download_ios_attempt');
+                            trackDeepLinkEvent('trabajador', trabajadorId, 'download_ios_attempt');
                         });
                     });
                 }, 100);
@@ -297,9 +293,9 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div class="container">
-        <div class="logo">🔧</div>
-        <h1>Abriendo Nubira</h1>
-        <p class="subtitle">Te estamos redirigiendo al servicio solicitado...</p>
+        <div class="logo">👤</div>
+        <h1>Abriendo Perfil de Trabajador</h1>
+        <p class="subtitle">Te estamos redirigiendo al perfil del profesional...</p>
         
         <div class="spinner"></div>
         
@@ -319,7 +315,7 @@
     </div>
 
     <!-- Nubira Advanced Analytics -->
-    <script src="../analytics-config.js"></script>
-    <script src="../ga4-page-fix.js"></script>
+    <script src="../../assets/js/analytics-config.js"></script>
+    <script src="../../assets/js/ga4-page-fix.js"></script>
 </body>
 </html>
