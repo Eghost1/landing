@@ -742,12 +742,14 @@ body.menu-open {
 .cta-download-section {
     padding: 5rem 0;
     background: var(--gradient-secondary);
+    overflow-x: hidden; /* Prevenir scroll horizontal */
 }
 
 .cta-download-content-centered {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
+    overflow-x: hidden; /* Prevenir scroll horizontal */
 }
 
 .download-header { margin-bottom: 3rem; }
@@ -768,10 +770,21 @@ body.menu-open {
 }
 
 .download-main-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
+    overflow-x: hidden; /* Prevenir scroll horizontal */
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Layout de dos columnas para pantallas medianas y grandes */
+@media (min-width: 768px) {
+    .download-main-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
 }
 
 .download-buttons-cards {
@@ -779,6 +792,10 @@ body.menu-open {
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0; /* Sin padding por defecto, se agrega en media query */
+    box-sizing: border-box;
 }
 
 .download-button-card {
@@ -789,7 +806,8 @@ body.menu-open {
     border: 1px solid rgba(108, 62, 180, 0.1);
     transition: all 0.3s ease;
     width: 100%;
-    max-width: 280px;
+    max-width: 320px;
+    box-sizing: border-box;
 }
 
 .download-button-card:hover {
@@ -846,6 +864,57 @@ body.menu-open {
     height: auto;
     border-radius: 1rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Nuevo layout de descarga con video */
+.download-left { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: 1.5rem; 
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.download-right { 
+    width: 100%; 
+    max-width: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 0; /* Sin padding por defecto */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.download-media { 
+    width: 100%; 
+    max-width: 380px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.download-video {
+    width: 100%;
+    max-width: 100%; /* No exceder el contenedor */
+    max-height: 700px;
+    aspect-ratio: 9 / 16; /* formato tipo app */
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(108, 62, 180, 0.15);
+    background: #000;
+    object-fit: cover;
+    display: block; /* Evitar espacio extra */
+    box-sizing: border-box; /* Incluir borde en el ancho */
+}
+
+.download-video-caption {
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
 }
 
 /* ===== CONTACT SECTION ===== */
@@ -1220,16 +1289,30 @@ body.menu-open {
         gap: 4rem;
     }
     
+    /* Layout de dos columnas: botones a la izquierda, video a la derecha */
     .download-main-container {
-        flex-direction: row;
-        justify-content: space-around;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
         align-items: center;
-        gap: 4rem;
     }
     
     .download-buttons-cards {
         flex-direction: column;
         gap: 1.5rem;
+        align-items: stretch;
+        padding: 0; /* Quitar padding en desktop */
+    }
+    
+    .download-button-card {
+        max-width: 100%;
+    }
+    
+    .download-right {
+        padding: 0; /* Quitar padding lateral en desktop */
+    }
+    
+    .download-media {
+        max-width: 350px;
     }
     
     .cta-phone-image {
@@ -1239,6 +1322,26 @@ body.menu-open {
 
 @media (min-width: 1024px) {
     .hero-title { font-size: 3.5rem; }
+    
+    /* Aumentar gap y tamaño del video en pantallas grandes */
+    .download-main-container {
+        gap: 4rem;
+    }
+    
+    .download-media {
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 1280px) {
+    /* Pantallas XL: layout aún más espacioso */
+    .download-main-container {
+        gap: 5rem;
+    }
+    
+    .download-button-card {
+        padding: 2rem;
+    }
 }
 
 @media (min-width: 1023px) and (max-width: 768px) {
@@ -1335,11 +1438,25 @@ body.menu-open {
     }
     
     /* Forzar que todos los elementos respeten el ancho de viewport */
-    .w-full, .max-w-screen-xl, .mx-auto, .px-5 {
+    .w-full, .max-w-screen-xl, .mx-auto {
         max-width: 100vw !important;
         width: 100% !important;
         overflow-x: hidden !important;
         box-sizing: border-box !important;
+    }
+    
+    /* Padding lateral mejorado para móvil */
+    .px-5 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Sección de descarga sin padding adicional */
+    .cta-download-section .px-5 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
     
     /* Asegurar que las secciones no causen overflow */
@@ -1502,47 +1619,93 @@ body.menu-open {
     .author-name { font-size: 0.95rem; }
     .author-role { font-size: 0.8rem; }
     
-    .cta-download-section { padding: 3rem 0; }
+    .cta-download-section { 
+        padding: 3rem 0; /* Sin padding horizontal aquí */
+    }
+    
+    .cta-download-content-centered {
+        padding: 0; /* Sin padding adicional */
+        max-width: 100%;
+    }
+    
     .cta-download-title {
         font-size: 1.8rem;
         margin-bottom: 1rem;
         line-height: 1.3;
+        padding: 0 1rem; /* Padding simple */
     }
     
     .cta-download-subtitle {
         font-size: 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 2rem; 
         line-height: 1.5;
+        padding: 0 1rem; /* Padding simple */
+    }
+    
+    .download-header {
+        margin-bottom: 2rem;
     }
     
     .download-main-container {
-        flex-direction: column;
-        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 0;
     }
     
     .download-buttons-cards {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.25rem;
         width: 100%;
+        padding: 0 1rem; /* Padding para móvil */
     }
     
     .download-button-card {
         max-width: 100%;
-        padding: 1rem;
+        width: 100%;
+        margin: 0 auto;
+        padding: 1.25rem;
+        box-sizing: border-box;
     }
     
     .download-button {
         gap: 0.75rem;
-        padding: 0.75rem;
+        padding: 0.875rem;
     }
     
     .download-icon {
-        width: 2rem;
-        height: 2rem;
+        width: 2.25rem;
+        height: 2.25rem;
     }
     
-    .download-subtitle { font-size: 0.7rem; }
-    .download-title { font-size: 0.9rem; }
+    .download-subtitle { font-size: 0.75rem; }
+    .download-title { font-size: 0.95rem; }
+    
+    .download-right {
+        padding: 0 1rem; /* Padding para móvil */
+        box-sizing: border-box;
+    }
+    
+    .download-media {
+        max-width: 320px; /* Más pequeño en móvil para evitar cortes */
+        width: 100%;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .download-video {
+        max-height: 550px; /* Altura más pequeña en móvil */
+        width: 100%;
+        max-width: 100%; /* No exceder el ancho del contenedor */
+        display: block;
+        box-sizing: border-box;
+    }
+    
+    .download-video-caption {
+        padding: 0;
+        margin-top: 1rem;
+    }
+    
     .cta-phone-image { max-width: 250px !important; }
     
     .contact-section { padding: 3rem 0; }
@@ -1787,6 +1950,32 @@ body.menu-open {
     .hero-title { font-size: 1.5rem !important; }
     .detailed-feature-card,
     .testimonial-card { padding: 1.5rem 1rem; }
+    
+    /* Ajustes para sección de descarga */
+    .cta-download-title {
+        font-size: 1.6rem !important;
+        padding: 0 0.75rem !important;
+    }
+    
+    .cta-download-subtitle {
+        padding: 0 0.75rem !important;
+    }
+    
+    .download-buttons-cards {
+        padding: 0 0.75rem !important;
+    }
+    
+    .download-right {
+        padding: 0 0.75rem !important;
+    }
+    
+    .download-media {
+        max-width: 280px !important; /* Más pequeño en pantallas pequeñas */
+    }
+    
+    .download-video {
+        max-height: 500px !important;
+    }
 }
 
 @media (max-width: 320px) {
@@ -1797,6 +1986,41 @@ body.menu-open {
     .navbar-container { padding: 0 0.25rem !important; }
     .logo-image { max-height: 1.75rem; }
     body { padding-top: 3rem !important; }
+    
+    /* Ajustes para sección de descarga */
+    .cta-download-title {
+        font-size: 1.3rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    .cta-download-subtitle {
+        font-size: 0.9rem !important;
+        padding: 0 0.5rem !important;
+    }
+    
+    .download-buttons-cards {
+        padding: 0 0.5rem !important;
+    }
+    
+    .download-button-card {
+        padding: 1rem !important;
+    }
+    
+    .download-button {
+        padding: 0.75rem !important;
+    }
+    
+    .download-right {
+        padding: 0 0.5rem !important;
+    }
+    
+    .download-media {
+        max-width: 260px !important; /* Muy pequeño para pantallas diminutas */
+    }
+    
+    .download-video {
+        max-height: 450px !important;
+    }
 }
 
 /* ===== REGLAS ANTI-OVERFLOW HORIZONTAL GLOBALES MÓVIL ===== */
