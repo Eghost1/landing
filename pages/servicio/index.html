@@ -21,21 +21,31 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicio - Nubira</title>
-    <meta name="description" content="Accede al servicio en la app de Nubira Seguridad. Conecta con profesionales de seguridad verificados.">
+    <title>🔧 Servicio - Nubira</title>
+    <meta name="description" content="Accede al servicio en la app de Nubira. Conecta con profesionale verificados.">
     
+    <!-- 
+    ⚠️ APP AÚN NO DISPONIBLE EN TIENDAS
+    La aplicación móvil de Nubira está actualmente en desarrollo.
+    Si deseas probar la app o recibir notificaciones cuando esté disponible,
+    contáctanos a través del formulario en la web.
+    
+    Una vez publicada, descomentar estas líneas y actualizar los IDs:
+    <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+    <meta name="google-play-app" content="app-id=cl.nubiraoficial.app">
+    -->
 
     <!-- Open Graph para redes sociales -->
-    <meta property="og:title" content="Nubira Seguridad - Servicio">
-    <meta property="og:description" content="Conecta con profesionales de seguridad verificados">
+    <meta property="og:title" content="Nubira - Servicio">
+    <meta property="og:description" content="Conecta con trabajadores verificados">
     <meta property="og:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
     <meta property="og:url" content="https://www.nubiraoficial.cl/pages/servicio/">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Nubira Seguridad - Servicio">
-    <meta name="twitter:description" content="Conecta con profesionales de seguridad verificados">
+    <meta name="twitter:title" content="Nubira - Servicio">
+    <meta name="twitter:description" content="Conecta con trabajadores verificados">
     <meta name="twitter:image" content="https://www.nubiraoficial.cl/assets/logoNUBIRA.png">
     
     <!-- Favicon -->
@@ -49,63 +59,59 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
         
         .container {
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
         
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            background: white;
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
         
-        p, #message {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
             line-height: 1.5;
         }
         
-        .spinner {
-            border: 4px solid rgba(255,255,255,0.3);
+        .loading {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
             border-radius: 50%;
-            border-top: 4px solid white;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 2rem auto;
+            margin: 20px 0;
         }
         
         @keyframes spin {
@@ -113,52 +119,61 @@
             100% { transform: rotate(360deg); }
         }
         
+        .buttons {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .buttons.show {
+            display: flex;
+        }
+        
         .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
             font-weight: 600;
-            margin: 0.5rem;
-            transition: transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
         .btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
         
-        .error {
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-            color: #ffcccc;
+        .btn:active {
+            transform: translateY(0);
         }
         
-        #actions {
-            margin-top: 2rem;
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
         }
         
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            p, #message {
-                font-size: 1rem;
-            }
-            
-            .logo {
-                width: 100px;
-                height: 100px;
-                font-size: 40px;
-            }
+        .btn-secondary:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-text {
+            color: #999;
+            font-size: 14px;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
     
@@ -207,144 +222,150 @@
         // OBTENER ID DEL SERVICIO
         // ========================================
         function getServiceId() {
-            // Método 1: Query parameter ?id=123
+            // Prioridad 1: Query parameter ?id=
             const urlParams = new URLSearchParams(window.location.search);
-            const queryId = urlParams.get('id');
+            const id = urlParams.get('id');
             
-            if (queryId) {
-                console.log('✅ ID encontrado en query params:', queryId);
-                return queryId;
+            if (id) {
+                console.log('📊 ID del servicio obtenido de query param:', id);
+                trackDeepLinkEvent('servicio', id, 'id_detected', {source: 'query_param'});
+                return id;
             }
             
-            // Método 2: Path /pages/servicio/123.html o /pages/servicio/123
-            const pathMatch = window.location.pathname.match(/\/servicio\/(\d+)(\.html)?$/);
-            if (pathMatch) {
-                console.log('✅ ID encontrado en path:', pathMatch[1]);
+            // Prioridad 2: Path con formato /35.html o /35
+            const pathMatch = window.location.pathname.match(/\/(\d+)\.html$/);
+            if (pathMatch && pathMatch[1]) {
+                console.log('📊 ID del servicio obtenido del path:', pathMatch[1]);
+                trackDeepLinkEvent('servicio', pathMatch[1], 'id_detected', {source: 'path'});
                 return pathMatch[1];
             }
             
-            // Método 3: Fallback - buscar en el path de forma más amplia
-            const parts = window.location.pathname.split('/').filter(p => p);
-            for (let i = 0; i < parts.length; i++) {
-                if (parts[i] === 'servicio' && parts[i + 1] && /^\d+$/.test(parts[i + 1])) {
-                    console.log('✅ ID encontrado en path segments:', parts[i + 1]);
-                    return parts[i + 1];
-                }
-            }
-            
-            console.warn('⚠️ No se encontró ID del servicio');
+            console.log('❌ No se pudo obtener el ID del servicio');
+            trackDeepLinkEvent('servicio', 'unknown', 'id_not_found');
             return null;
         }
 
-        // ========================================
-        // ABRIR APP
-        // ========================================
-        function openApp(servicioId) {
-            console.log('🔗 Intentando abrir servicio:', servicioId);
+        // Detectar plataforma
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /Android/.test(navigator.userAgent);
+        const isDesktop = !isIOS && !isAndroid;
+
+        console.log('📱 Plataforma detectada:', {isIOS, isAndroid, isDesktop});
+
+        // Función para abrir la app
+        function openApp(retry = false) {
+            const servicioId = getServiceId();
             
-            trackDeepLinkEvent('servicio', servicioId, 'deeplink_attempt', {
-                method: 'auto_redirect'
-            });
+            if (!servicioId) {
+                document.getElementById('title').textContent = '⚠️ Error';
+                document.getElementById('subtitle').textContent = 'No se pudo obtener la información del servicio';
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('buttons').classList.add('show');
+                trackDeepLinkEvent('servicio', 'unknown', 'error_no_id');
+                return;
+            }
+
+            console.log('� Intentando abrir app para servicio:', servicioId);
             
-            // Construir URLs de deep linking
+            if (retry) {
+                trackDeepLinkEvent('servicio', servicioId, 'manual_retry');
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('buttons').classList.remove('show');
+            } else {
+                trackDeepLinkEvent('servicio', servicioId, 'auto_open_attempt');
+            }
+
+            // URLs para diferentes métodos
             const customSchemeUrl = `nubiraseguridad://servicio/${servicioId}`;
             const universalLinkUrl = `https://www.nubiraoficial.cl/pages/servicio/?id=${servicioId}`;
-            
-            // Detectar plataforma
-            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            
-            // Actualizar el enlace del botón
-            const appLinkBtn = document.getElementById('appLink');
-            if (appLinkBtn) {
-                appLinkBtn.href = customSchemeUrl;
-                appLinkBtn.onclick = () => {
-                    trackDeepLinkEvent('servicio', servicioId, 'manual_button_click');
-                };
-            }
-            
-            // Intentar abrir automáticamente según plataforma
+
             if (isIOS) {
-                // iOS: Intentar con Universal Link primero
-                trackDeepLinkEvent('servicio', servicioId, 'ios_universal_link_attempt');
+                console.log('🍎 Intentando abrir en iOS...');
+                trackDeepLinkEvent('servicio', servicioId, 'ios_open_attempt');
+                
+                // En iOS, intentar primero el Universal Link
                 window.location.href = universalLinkUrl;
                 
-                // Fallback a custom scheme después de un delay
+                // Fallback a custom scheme después de un momento
                 setTimeout(() => {
-                    trackDeepLinkEvent('servicio', servicioId, 'ios_custom_scheme_fallback');
                     window.location.href = customSchemeUrl;
+                    console.log('📱 Intentando custom scheme:', customSchemeUrl);
                 }, 500);
+                
             } else if (isAndroid) {
-                // Android: Intentar con Intent
+                console.log('🤖 Intentando abrir en Android...');
+                trackDeepLinkEvent('servicio', servicioId, 'android_open_attempt');
+                
+                // En Android, usar Intent primero
                 const intentUrl = `intent://servicio/${servicioId}#Intent;scheme=nubiraseguridad;package=cl.nubiraoficial.app;end`;
-                trackDeepLinkEvent('servicio', servicioId, 'android_intent_attempt');
                 window.location.href = intentUrl;
+                console.log('📱 Intent URL:', intentUrl);
                 
                 // Fallback a custom scheme
                 setTimeout(() => {
-                    trackDeepLinkEvent('servicio', servicioId, 'android_custom_scheme_fallback');
                     window.location.href = customSchemeUrl;
+                    console.log('📱 Intentando custom scheme:', customSchemeUrl);
                 }, 500);
-            } else {
-                // Desktop: Intentar custom scheme
-                trackDeepLinkEvent('servicio', servicioId, 'desktop_custom_scheme_attempt');
-                window.location.href = customSchemeUrl;
-            }
-            
-            // Si no se abre en 3 segundos, mostrar opciones manuales
-            setTimeout(() => {
-                trackDeepLinkEvent('servicio', servicioId, 'timeout_show_manual_options', {
-                    timeout_ms: 3000
-                });
                 
-                document.querySelector('.spinner').style.display = 'none';
-                document.getElementById('actions').style.display = 'block';
-                document.getElementById('message').textContent = 'Si no se abrió automáticamente, usa estos botones:';
+            } else {
+                console.log('💻 Desktop detectado, mostrando opciones...');
+                trackDeepLinkEvent('servicio', servicioId, 'desktop_detected');
+                // En desktop, solo mostrar botones
+                showButtons();
+                document.getElementById('title').textContent = '💻 Usa tu celular';
+                document.getElementById('subtitle').textContent = 'Para usar Nubira, escanea el código QR con tu celular o instala la app.';
+            }
+
+            // Después de 3 segundos, mostrar botones si no se abrió la app
+            setTimeout(() => {
+                showButtons();
             }, 3000);
         }
 
-        // ========================================
-        // MOSTRAR ERROR
-        // ========================================
-        function showError(message) {
-            trackDeepLinkEvent('servicio', 'unknown', 'error_shown', {
-                error_message: message
-            });
+        function showButtons() {
+            const servicioId = getServiceId();
+            trackDeepLinkEvent('servicio', servicioId || 'unknown', 'show_manual_buttons');
             
-            document.querySelector('.spinner').style.display = 'none';
-            document.getElementById('message').textContent = 'Error';
-            document.getElementById('error').textContent = message;
-            document.getElementById('error').style.display = 'block';
-            document.getElementById('actions').style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('buttons').classList.add('show');
+            document.getElementById('title').textContent = '¿No se abrió la app?';
+            document.getElementById('subtitle').textContent = 'Presiona el botón para intentar nuevamente';
+            document.getElementById('infoText').innerHTML = 
+                '<strong>💡 Nota:</strong> Si no tienes la app instalada, contáctanos para obtener acceso.<br>' +
+                'Una vez instalada, este enlace abrirá automáticamente el servicio.';
         }
 
-        // ========================================
-        // INICIALIZACIÓN
-        // ========================================
-        window.addEventListener('DOMContentLoaded', () => {
-            // Log para debugging
-            console.log('📍 URL actual:', window.location.href);
-            console.log('📍 Query params:', window.location.search);
-            console.log('📍 Path:', window.location.pathname);
-            
-            // Obtener el ID del servicio
+        // Intentar abrir automáticamente al cargar la página
+        window.onload = function() {
             const servicioId = getServiceId();
+            trackDeepLinkEvent('servicio', servicioId || 'unknown', 'page_loaded');
             
-            if (servicioId) {
-                console.log('✅ ID del servicio encontrado:', servicioId);
-                
-                // Track del acceso inicial
-                trackDeepLinkEvent('servicio', servicioId, 'page_access', {
-                    access_time: Date.now(),
-                    page_title: document.title,
-                    url: window.location.href
-                });
-                
-                // Intentar abrir la app automáticamente
-                openApp(servicioId);
+            // Solo auto-abrir en móviles
+            if (isIOS || isAndroid) {
+                openApp();
             } else {
-                console.error('❌ No se encontró ID del servicio en la URL');
-                showError('No se especificó un servicio válido. La URL debe incluir un ID (ej: /pages/servicio/123 o /pages/servicio/?id=123)');
+                // En desktop, mostrar directamente los botones
+                showButtons();
+            }
+        };
+
+        // Detectar si la app se abrió (usuario sale de la página)
+        let hidden = false;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                hidden = true;
+                const servicioId = getServiceId();
+                trackDeepLinkEvent('servicio', servicioId || 'unknown', 'app_opened_success');
+                console.log('✅ La app parece haberse abierto (página oculta)');
+            }
+        });
+
+        // Si el usuario vuelve a la página después de 2 segundos, probablemente la app no se abrió
+        window.addEventListener('focus', function() {
+            if (hidden) {
+                const servicioId = getServiceId();
+                trackDeepLinkEvent('servicio', servicioId || 'unknown', 'user_returned');
+                console.log('ℹ️ El usuario volvió a la página');
             }
         });
     </script>
@@ -356,15 +377,24 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <div class="container">
-        <div class="logo">�️</div>
-        <h1>Abriendo servicio...</h1>
-        <p id="message">Redirigiendo a la aplicación Nubira</p>
-        <div class="spinner"></div>
-        <div id="actions" style="display: none;">
-            <a href="#" id="appLink" class="btn">Abrir en la App</a>
-            <a href="https://www.nubiraoficial.cl" class="btn">Ir al sitio web</a>
+        <div class="icon">🔧</div>
+        <h1 id="title">Abriendo Servicio</h1>
+        <p class="subtitle" id="subtitle">Estamos redirigiendo a la app Nubira...</p>
+        
+        <div class="loading" id="loading"></div>
+        
+        <div class="buttons" id="buttons">
+            <button class="btn" onclick="openApp(true)">
+                📱 Abrir en Nubira
+            </button>
+            <button class="btn btn-secondary" onclick="window.location.href='https://www.nubiraoficial.cl'">
+                🏠 Ir al sitio web
+            </button>
         </div>
-        <div id="error" class="error" style="display: none;"></div>
+        
+        <p class="info-text" id="infoText">
+            Si no se abre automáticamente en unos segundos, presiona el botón de arriba.
+        </p>
     </div>
 
     <!-- Nubira Advanced Analytics -->
