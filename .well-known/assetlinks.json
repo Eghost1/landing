@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "cl.nubiraoficial.app",
+      "package_name": "com.nubira.seguridad",
       "sha256_cert_fingerprints": [
       "96:B3:5D:6E:6E:84:0A:62:C9:32:DD:D0:E4:34:A9:E6:64:64:02:46:3E:51:30:58:5F:5A:88:23:5C:82:05:C9"
       ]
