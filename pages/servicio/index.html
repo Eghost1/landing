@@ -32,7 +32,7 @@
     
     Una vez publicada, descomentar estas líneas y actualizar los IDs:
     <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
-    <meta name="google-play-app" content="app-id=cl.nubiraoficial.app">
+    <meta name="google-play-app" content="app-id=com.nubira.seguridad">
     -->
 
     <!-- Open Graph para redes sociales -->
@@ -297,7 +297,7 @@
                 trackDeepLinkEvent('servicio', servicioId, 'android_open_attempt');
                 
                 // En Android, usar Intent primero
-                const intentUrl = `intent://servicio/${servicioId}#Intent;scheme=nubiraseguridad;package=cl.nubiraoficial.app;end`;
+                const intentUrl = `intent://servicio/${servicioId}#Intent;scheme=nubiraseguridad;package=com.nubira.seguridad;end`;
                 window.location.href = intentUrl;
                 console.log('📱 Intent URL:', intentUrl);
                 

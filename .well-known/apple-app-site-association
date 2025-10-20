@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.cl.nubiraoficial.app",
+        "appID": "TEAM_ID.com.nubira.seguridad",
         "paths": [
           "/servicio/*",
           "/trabajador/*",
@@ -14,6 +14,6 @@
     ]
   },
   "webcredentials": {
-    "apps": ["TEAM_ID.cl.nubiraoficial.app"]
+    "apps": ["TEAM_ID.com.nubira.seguridad"]
   }
 }
