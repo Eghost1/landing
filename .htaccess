@@ -50,40 +50,78 @@ RewriteCond %{HTTP_HOST} ^nubiraoficial\.cl [NC]
 RewriteRule ^(.*)$ https://www.nubiraoficial.cl/$1 [L,R=301]
 
 # ==================================================
-# DEEP LINKS REDIRECTION FIX
+# DEEP LINKS REDIRECTION FIX - CON QUERY PARAMETERS
 # ==================================================
-# Redirigir /servicio/* a /pages/servicio/*
 
-# Redirigir servicio/ y servicio/index.html a pages/servicio/
+# ========== SERVICIOS ==========
+
+# Redirigir /servicio/?id=123 a /pages/servicio/?id=123 (CON query string)
+RewriteCond %{REQUEST_URI} ^/servicio/?$
+RewriteCond %{QUERY_STRING} id=([0-9]+)
+RewriteRule ^servicio/?$ /pages/servicio/?id=%1 [R=301,L,QSA]
+
+# Redirigir /servicio/123.html a /pages/servicio/?id=123
+RewriteRule ^servicio/([0-9]+)\.html$ /pages/servicio/?id=$1 [R=301,L,QSA]
+
+# Redirigir /servicio/123 (sin extensión) a /pages/servicio/?id=123
+RewriteRule ^servicio/([0-9]+)$ /pages/servicio/?id=$1 [R=301,L,QSA]
+
+# Redirigir /servicio/ y /servicio/index.html a /pages/servicio/
 RewriteRule ^servicio/?$ /pages/servicio/ [R=301,L]
 RewriteRule ^servicio/index\.html$ /pages/servicio/index.html [R=301,L]
 
-# Redirigir servicio/{id}.html a pages/servicio/{id}.html
-RewriteRule ^servicio/([0-9]+)\.html$ /pages/servicio/$1.html [R=301,L]
+# ========== TRABAJADORES ==========
 
-# Redirigir servicio/{id} (sin extensión) a pages/servicio/{id}
-RewriteRule ^servicio/([0-9]+)$ /pages/servicio/$1 [R=301,L]
+# Redirigir /trabajador/?id=123 a /pages/trabajador/?id=123 (CON query string)
+RewriteCond %{REQUEST_URI} ^/trabajador/?$
+RewriteCond %{QUERY_STRING} id=([0-9]+)
+RewriteRule ^trabajador/?$ /pages/trabajador/?id=%1 [R=301,L,QSA]
 
-# Redirigir trabajador/ y trabajador/index.html a pages/trabajador/
+# Redirigir /trabajador/123.html a /pages/trabajador/?id=123
+RewriteRule ^trabajador/([0-9]+)\.html$ /pages/trabajador/?id=$1 [R=301,L,QSA]
+
+# Redirigir /trabajador/123 (sin extensión) a /pages/trabajador/?id=123
+RewriteRule ^trabajador/([0-9]+)$ /pages/trabajador/?id=$1 [R=301,L,QSA]
+
+# Redirigir /trabajador/ y /trabajador/index.html a /pages/trabajador/
 RewriteRule ^trabajador/?$ /pages/trabajador/ [R=301,L]
 RewriteRule ^trabajador/index\.html$ /pages/trabajador/index.html [R=301,L]
 
-# Redirigir trabajador/{id}.html a pages/trabajador/{id}.html
-RewriteRule ^trabajador/([0-9]+)\.html$ /pages/trabajador/$1.html [R=301,L]
+# ==================================================
+# MANEJO DE PÁGINAS EN /pages/
+# ==================================================
 
-# Redirigir trabajador/{id} (sin extensión) a pages/trabajador/{id}
-RewriteRule ^trabajador/([0-9]+)$ /pages/trabajador/$1 [R=301,L]
+# Si se accede a /pages/servicio/?id=123, asegurarse de servir index.html
+RewriteCond %{REQUEST_URI} ^/pages/servicio/?$
+RewriteCond %{QUERY_STRING} id=([0-9]+)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pages/servicio/?$ /pages/servicio/index.html [L,QSA]
 
-# Remover extensión .html de las URLs
+# Si se accede a /pages/trabajador/?id=123, asegurarse de servir index.html
+RewriteCond %{REQUEST_URI} ^/pages/trabajador/?$
+RewriteCond %{QUERY_STRING} id=([0-9]+)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pages/trabajador/?$ /pages/trabajador/index.html [L,QSA]
+
+# ==================================================
+# REMOVER EXTENSIÓN .HTML DE URLs GENERALES
+# ==================================================
+
+# Remover extensión .html de las URLs (DESPUÉS de deep links)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/pages/(servicio|trabajador)
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
-# Redireccionar URLs con .html a sin extensión
+# Redireccionar URLs con .html a sin extensión (excepto páginas de deep links)
 RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteCond %{REQUEST_URI} !^/pages/(servicio|trabajador)
 RewriteRule ^ /%1 [NC,L,R=301]
 
-# Redirecciones específicas para SEO de Nubira
+# ==================================================
+# REDIRECCIONES ESPECÍFICAS PARA SEO
+# ==================================================
+
 Redirect 301 /home /
 Redirect 301 /inicio /
 Redirect 301 /about /nosotros
@@ -91,7 +129,10 @@ Redirect 301 /team /nosotros
 Redirect 301 /contact /
 Redirect 301 /contacto /
 
-# Headers de seguridad
+# ==================================================
+# HEADERS DE SEGURIDAD
+# ==================================================
+
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options nosniff
     Header always set X-Frame-Options DENY
@@ -103,7 +144,7 @@ Redirect 301 /contacto /
 # ==================================================
 # UNIVERSAL LINKS - MIME TYPES Y HEADERS
 # ==================================================
-# Configurar MIME types correctos para archivos de configuración
+
 <IfModule mod_mime.c>
     # Apple App Site Association (sin extensión)
     <FilesMatch "^apple-app-site-association$">
@@ -141,18 +182,27 @@ Redirect 301 /contacto /
     Deny from all
 </Files>
 
-# Optimización de imágenes
+# ==================================================
+# OPTIMIZACIÓN DE IMÁGENES
+# ==================================================
+
 <IfModule mod_headers.c>
     <FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>
 </IfModule>
 
-# Error pages personalizadas (opcional)
+# ==================================================
+# ERROR PAGES PERSONALIZADAS
+# ==================================================
+
 ErrorDocument 404 /404.html
 ErrorDocument 500 /500.html
 
-# Prevenir hotlinking de imágenes
+# ==================================================
+# PREVENIR HOTLINKING DE IMÁGENES
+# ==================================================
+
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^https?://(www\.)?nubiraoficial\.cl [NC]
 RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F]
