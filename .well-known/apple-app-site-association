@@ -1,12 +1,19 @@
 {
   "applinks": {
     "apps": [],
-    "details": [{
-      "appID": "TEMP_TEAM_ID.com.nubira.seguridad",
-      "paths": [
-        "/servicio/*",
-        "/trabajador/*"
-      ]
-    }]
+    "details": [
+      {
+        "appID": "TEAM_ID.cl.nubiraoficial.app",
+        "paths": [
+          "/servicio/*",
+          "/trabajador/*",
+          "/pages/servicio/*",
+          "/pages/trabajador/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["TEAM_ID.cl.nubiraoficial.app"]
   }
 }

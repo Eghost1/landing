@@ -27,9 +27,20 @@
     ExpiresByType text/html "access plus 1 hour"
 </IfModule>
 
-# Redirecciones SEO amigables
+# ==================================================
+# REDIRECCIONES SEO Y DEEP LINKS
+# ==================================================
 RewriteEngine On
 
+# ==================================================
+# UNIVERSAL LINKS - Mantener acceso directo a .well-known
+# ==================================================
+# Asegurar que .well-known sea accesible (debe ir PRIMERO)
+RewriteRule ^\.well-known/ - [L]
+
+# ==================================================
+# FORZAR HTTPS Y WWW
+# ==================================================
 # Forzar HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
@@ -37,6 +48,31 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Forzar WWW (opcional - ajustar según preferencia)
 RewriteCond %{HTTP_HOST} ^nubiraoficial\.cl [NC]
 RewriteRule ^(.*)$ https://www.nubiraoficial.cl/$1 [L,R=301]
+
+# ==================================================
+# DEEP LINKS REDIRECTION FIX
+# ==================================================
+# Redirigir /servicio/* a /pages/servicio/*
+
+# Redirigir servicio/ y servicio/index.html a pages/servicio/
+RewriteRule ^servicio/?$ /pages/servicio/ [R=301,L]
+RewriteRule ^servicio/index\.html$ /pages/servicio/index.html [R=301,L]
+
+# Redirigir servicio/{id}.html a pages/servicio/{id}.html
+RewriteRule ^servicio/([0-9]+)\.html$ /pages/servicio/$1.html [R=301,L]
+
+# Redirigir servicio/{id} (sin extensión) a pages/servicio/{id}
+RewriteRule ^servicio/([0-9]+)$ /pages/servicio/$1 [R=301,L]
+
+# Redirigir trabajador/ y trabajador/index.html a pages/trabajador/
+RewriteRule ^trabajador/?$ /pages/trabajador/ [R=301,L]
+RewriteRule ^trabajador/index\.html$ /pages/trabajador/index.html [R=301,L]
+
+# Redirigir trabajador/{id}.html a pages/trabajador/{id}.html
+RewriteRule ^trabajador/([0-9]+)\.html$ /pages/trabajador/$1.html [R=301,L]
+
+# Redirigir trabajador/{id} (sin extensión) a pages/trabajador/{id}
+RewriteRule ^trabajador/([0-9]+)$ /pages/trabajador/$1 [R=301,L]
 
 # Remover extensión .html de las URLs
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -64,11 +100,41 @@ Redirect 301 /contacto /
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
-# Bloquear acceso a archivos sensibles
-<Files ~ "^\.">
-    Order allow,deny
-    Deny from all
-</Files>
+# ==================================================
+# UNIVERSAL LINKS - MIME TYPES Y HEADERS
+# ==================================================
+# Configurar MIME types correctos para archivos de configuración
+<IfModule mod_mime.c>
+    # Apple App Site Association (sin extensión)
+    <FilesMatch "^apple-app-site-association$">
+        Header set Content-Type "application/json"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+    
+    # Android Asset Links
+    <FilesMatch "^assetlinks\.json$">
+        Header set Content-Type "application/json"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# Permitir acceso a archivos .well-known
+<IfModule mod_authz_core.c>
+    <Directory "/\.well-known">
+        Require all granted
+    </Directory>
+</IfModule>
+
+# Bloquear acceso a archivos sensibles (excepto .well-known)
+<FilesMatch "^\.(?!well-known)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
 
 <Files ~ "(\.htaccess|\.htpasswd|\.ini|\.log|\.sh|\.sql|\.bak)$">
     Order allow,deny
