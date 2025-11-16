@@ -24,8 +24,8 @@
     
     <!-- SEO Meta Tags Optimizados -->
     <title>Nubira - Plataforma de Citas con Trabajadores Verificados | Servicios Profesionales</title>
-    <meta name="description" content="Nubira es la plataforma líder para conectar clientes con trabajadores verificados. Agenda citas seguras, pagos protegidos y verificación de identidad. ¡Encuentra profesionales de confianza cerca de ti!" />
-    <meta name="keywords" content="nubira, trabajadores verificados, agenda citas profesionales, servicios trabajadores, plataforma trabajadores, citas profesionales chile, trabajadores confianza, pagos seguros trabajadores, verificación identidad profesionales, nubira app, nubira chile, nubira oficial" />
+    <meta name="description" content="Nubira es la plataforma líder para conectar clientes con trabajadores verificados. Agenda citas seguras, pagos protegidos y verificación de identidad. ¡Encuentra Trabajadores de confianza cerca de ti!" />
+    <meta name="keywords" content="nubira, trabajadores verificados, agenda citas profesionales, servicios trabajadores, plataforma trabajadores, citas profesionales chile, trabajadores confianza, pagos seguros trabajadores, verificación identidad Trabajadores, nubira app, nubira chile, nubira oficial" />
     <meta name="author" content="Nubira" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="language" content="Spanish" />
@@ -63,7 +63,7 @@
         "name": "Nubira",
         "alternateName": "Nubira Oficial",
         "url": "https://www.nubiraoficial.cl",
-        "description": "Plataforma líder para conectar clientes con trabajadores verificados. Agenda citas seguras con profesionales de confianza.",
+        "description": "Plataforma líder para conectar clientes con trabajadores verificados. Agenda citas seguras con Trabajadores de confianza.",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://www.nubiraoficial.cl/buscar?q={search_term_string}",
@@ -117,6 +117,7 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/testimonials-slider.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -298,7 +299,7 @@
                     </div>
                     <h3 class="detailed-feature-title">Pagos seguros con Nubira</h3>
                     <p class="detailed-feature-description">
-                        Sistema de prepago del 50% que protege tanto a clientes como trabajadores de cancelaciones en la plataforma Nubira.
+                        Sistema de prepago que protege tanto a clientes como trabajadores de cancelaciones en la plataforma Nubira.
                     </p>
                 </div>
                 <div class="detailed-feature-card">
@@ -307,7 +308,7 @@
                     </div>
                     <h3 class="detailed-feature-title">Recordatorios automáticos Nubira</h3>
                     <p class="detailed-feature-description">
-                        Notificaciones por WhatsApp 24 horas antes para confirmar o reagendar tu cita a través de Nubira.
+                        Notificaciones 24 horas antes para confirmar o reagendar tu cita a través de Nubira.
                     </p>
                 </div>
                 <div class="detailed-feature-card">
@@ -323,57 +324,61 @@
         </div>
     </section>
 
-    <!-- Testimonials Section with SEO optimization -->
+    <!-- Testimonials Section converted to mobile slider (keeps desktop grid) -->
     <div class="testimonials-section">
         <div class="w-full max-w-screen-xl mx-auto px-5">
             <h2 class="testimonials-title">
                 Lo que dicen nuestros <span class="text-primary">usuarios de Nubira</span>
             </h2>
             <div class="testimonials-scroll">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Nubira me ha facilitado enormemente encontrar clientes. El sistema de pagos me da tranquilidad y los recordatorios reducen las cancelaciones. Recomiendo Nubira a todos los profesionales."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="w-full">
-                            <p class="author-name">María González</p>
-                            <p class="author-role">Psicóloga - Usuario Nubira</p>
+                <div class="testimonials-slider" aria-roledescription="carousel">
+                    <button class="slider-btn slider-prev" aria-label="Anterior">‹</button>
+                    <div class="slides" id="testimonialSlides">
+                        <div class="slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Con Nubira podrías encontrar al profesional ideal en minutos: reservar, pagar y revisar calificaciones de forma sencilla y confiable. La plataforma podría simplificar todo el proceso de reserva."</p>
+                                <div class="testimonial-author"><div class="w-full"><p class="author-name">Carlos Mendoza</p><p class="author-role">Cliente satisfecho — Reservó en Nubira</p></div></div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Si buscas seguridad al agendar, Nubira podría ofrecer verificación de trabajadores y pagos protegidos que te den tranquilidad al reservar servicios."</p>
+                                <div class="testimonial-author"><div class="w-full"><p class="author-name">Sofía Herrera</p><p class="author-role">Cliente — Reserva con confianza</p></div></div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Como usuario, podrías comparar reseñas y elegir al profesional que mejor se adapte a tus necesidades, todo desde una misma plataforma. Nubira podría hacer el proceso más simple."</p>
+                                <div class="testimonial-author"><div class="w-full"><p class="author-name">Jorge Pérez</p><p class="author-role">Cliente — Comparó Trabajadores</p></div></div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Nubira podría ayudarte a aumentar la ocupación de tu agenda: reducción de ausencias y una gestión de pagos más segura. Los recordatorios automatizados podrían mejorar la puntualidad de tus clientes."</p>
+                                <div class="testimonial-author"><div class="w-full"><p class="author-name">María González</p><p class="author-role">Entrenadora Personal — Trabajadora independiente</p></div></div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"Para Trabajadores, Nubira podría reducir la carga administrativa: menos gestión manual y recordatorios que mejoren la preparación de los pacientes. Eso podría traducirse en una mayor tasa de asistencia."</p>
+                                <div class="testimonial-author"><div class="w-full"><p class="author-name">Dr. Roberto Silva</p><p class="author-role">Médico especialista — Trabajador independiente</p></div></div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">"La verificación de trabajadores y los recordatorios podrían marcar la diferencia: podrías dedicar más tiempo a atender y menos a coordinar citas. Nubira busca transformar el flujo de trabajo del servicio."</p>
+                                <div class="testimonial-author"><div class="w-full"><p class="author-name">Ana Rodríguez</p><p class="author-role">Nutricionista — Trabajadora independiente</p></div></div>
+                            </div>
                         </div>
                     </div>
+                    <button class="slider-btn slider-next" aria-label="Siguiente">›</button>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Como cliente, me encanta poder ver las calificaciones y agendar citas fácilmente en Nubira. La verificación de trabajadores me da mucha confianza al usar la plataforma."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="w-full">
-                            <p class="author-name">Carlos Mendoza</p>
-                            <p class="author-role">Cliente Nubira</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "El sistema de recordatorios de Nubira es excelente. Mis clientes siempre llegan puntuales y preparados para sus citas. Nubira ha mejorado mi práctica profesional."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="w-full">
-                            <p class="author-name">Dr. Roberto Silva</p>
-                            <p class="author-role">Médico especialista - Nubira</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Nubira ha transformado mi práctica profesional. Ahora puedo enfocarme en brindar un mejor servicio sin preocuparme por la gestión de citas. Gracias Nubira."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="w-full">
-                            <p class="author-name">Ana Rodríguez</p>
-                            <p class="author-role">Nutricionista - Profesional Nubira</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="slider-dots" id="testimonialDots" aria-hidden="false"></div>
             </div>
         </div>
     </div>
@@ -385,7 +390,7 @@
                 <div class="download-header">
                     <h2 class="cta-download-title">Descarga la app Nubira y conecta con trabajadores</h2>
                     <p class="cta-download-subtitle">
-                        Únete a los usuarios que ya confían en Nubira para sus citas con trabajadores profesionales. 
+                        Únete a los usuarios que ya confían en Nubira para sus citas con trabajadores independientes. 
                         Descarga Nubira disponible para iOS y Android (próximamente...).
                     </p>
                 </div>
@@ -481,10 +486,10 @@
                 </div>
                 <div class="footer-links">
                     <a href="#caracteristicas" class="footer-link" title="Funcionalidades de Nubira">Funcionalidades Nubira</a>
-                    <a href="nosotros.html" class="footer-link" title="Conoce el equipo de Nubira">Nosotros Nubira</a>
-                    <a href="#contacto" class="footer-link" title="Contacta con Nubira">Contacto Nubira</a>
-                    <a href="#" class="footer-link" title="Términos y condiciones de Nubira">Términos Nubira</a>
-                    <a href="#" class="footer-link" title="Política de privacidad de Nubira">Privacidad Nubira</a>
+                    <a href="nosotros.html" class="footer-link" title="Conoce el equipo de Nubira">Nosotros</a>
+                    <a href="#contacto" class="footer-link" title="Contacta con Nubira">Contacto</a>
+                    <a href="#" class="footer-link" title="Términos y condiciones de Nubira">Términos</a>
+                    <a href="#" class="footer-link" title="Política de privacidad de Nubira">Privacidad</a>
                 </div>
                 <div class="footer-social">
                     <h4 class="footer-social-title">Síguenos</h4>
@@ -663,6 +668,87 @@
                 });
             }
         });
+    </script>
+    <script>
+        // Testimonials slider (mobile-only behavior)
+        (function () {
+            const slidesContainer = document.getElementById('testimonialSlides');
+            if (!slidesContainer) return;
+            const slides = Array.from(slidesContainer.children);
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            const dotsContainer = document.getElementById('testimonialDots');
+            let current = 0;
+
+            function update() {
+                // mover el contenedor .slides en lugar de cada slide individual
+                slidesContainer.style.transform = `translateX(${-current * 100}%)`;
+                if (!dotsContainer) return;
+                const dots = Array.from(dotsContainer.children);
+                dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            function go(n) {
+                current = (n + slides.length) % slides.length;
+                update();
+            }
+
+            function init() {
+                if (!slides.length) return;
+                // asegurar que cada slide ocupe 100% en móvil
+                slides.forEach((s) => { s.style.minWidth = '100%'; });
+                slidesContainer.style.transition = 'transform 300ms ease';
+
+                if (dotsContainer) {
+                    slides.forEach((_, i) => {
+                        const dot = document.createElement('button');
+                        dot.className = 'slider-dot';
+                        dot.setAttribute('aria-label', `Ir al testimonio ${i + 1}`);
+                        dot.addEventListener('click', () => go(i));
+                        dotsContainer.appendChild(dot);
+                    });
+                    // marcar dot inicial
+                    if (dotsContainer.firstChild) dotsContainer.firstChild.classList.add('active');
+                }
+
+                prevBtn && prevBtn.addEventListener('click', () => go(current - 1));
+                nextBtn && nextBtn.addEventListener('click', () => go(current + 1));
+
+                // touch support para el contenedor
+                let startX = 0;
+                let deltaX = 0;
+                slidesContainer.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+                slidesContainer.addEventListener('touchmove', (e) => { deltaX = e.touches[0].clientX - startX; });
+                slidesContainer.addEventListener('touchend', () => { if (Math.abs(deltaX) > 50) go(current - Math.sign(deltaX)); deltaX = 0; });
+
+                function handleResize() {
+                    if (window.matchMedia('(max-width: 768px)').matches) {
+                        // activar comportamiento de slider
+                        slidesContainer.style.display = 'flex';
+                        slidesContainer.style.width = `${slides.length * 100}%`;
+                        slides.forEach(s => s.style.flex = '0 0 100%');
+                        update();
+                        if (dotsContainer) dotsContainer.style.display = 'flex';
+                        if (prevBtn) prevBtn.style.display = 'block';
+                        if (nextBtn) nextBtn.style.display = 'block';
+                    } else {
+                        // restaurar comportamiento de grid/desktop
+                        slidesContainer.style.transform = '';
+                        slidesContainer.style.display = '';
+                        slidesContainer.style.width = '';
+                        slides.forEach(s => { s.style.flex = ''; s.style.minWidth = ''; });
+                        if (dotsContainer) dotsContainer.style.display = 'none';
+                        if (prevBtn) prevBtn.style.display = 'none';
+                        if (nextBtn) nextBtn.style.display = 'none';
+                    }
+                }
+
+                window.addEventListener('resize', handleResize);
+                handleResize();
+            }
+
+            document.addEventListener('DOMContentLoaded', init);
+        })();
     </script>
 
     <!-- Nubira Advanced Analytics -->

@@ -1,0 +1,21 @@
+/* Testimonials slider styles (mobile-first) */
+.testimonials-slider { position: relative; overflow: hidden; }
+.slides { display: flex; transition: transform 300ms ease; will-change: transform; }
+.slide { flex: 0 0 100%; box-sizing: border-box; padding: 0 0.75rem; }
+.testimonial-card { margin: 0.5rem 0; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 30; }
+.slider-prev { left: 8px; }
+.slider-next { right: 8px; }
+.slider-dots { display:flex; gap:8px; justify-content:center; margin-top:10px; }
+.slider-dot { width:8px; height:8px; background:rgba(0,0,0,0.12); border-radius:50%; }
+.slider-dot.active { background:var(--primary); }
+
+/* Desktop: show cards side-by-side in a rectangular grid similar to the original layout */
+@media(min-width:768px){
+  .testimonials-slider { overflow: visible; padding: 1rem; }
+  .slides { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; transform: none !important; align-items: stretch; }
+  .slide { flex: none; padding: 0; display: flex; }
+  .testimonial-card { margin: 0; display: flex; flex-direction: column; height: 100%; }
+  .testimonial-text { flex: 1 1 auto; }
+  .slider-btn, .slider-dots { display: none; }
+}
