@@ -13,6 +13,9 @@
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
 
+# Asegurar que Apache sirva index.html como DirectoryIndex (permite rutas tipo /nosotros -> /nosotros/index.html)
+DirectoryIndex index.html
+
 # Cache de archivos estáticos
 <IfModule mod_expires.c>
     ExpiresActive on

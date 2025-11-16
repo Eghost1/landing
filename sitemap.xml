@@ -12,25 +12,25 @@
         <priority>1.0</priority>
     </url>
     
-    <!-- Página de inicio -->
+    <!-- Página de inicio (canónica) -->
     <url>
-        <loc>https://www.nubiraoficial.cl/index.html</loc>
+        <loc>https://www.nubiraoficial.cl/</loc>
         <lastmod>2025-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-    
+
     <!-- Página nosotros -->
     <url>
-        <loc>https://www.nubiraoficial.cl/nosotros.html</loc>
+        <loc>https://www.nubiraoficial.cl/nosotros</loc>
         <lastmod>2025-08-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- Página de gracias -->
     <url>
-        <loc>https://www.nubiraoficial.cl/gracias.html</loc>
+        <loc>https://www.nubiraoficial.cl/gracias</loc>
         <lastmod>2025-08-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>

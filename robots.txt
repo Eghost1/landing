@@ -10,10 +10,10 @@ Disallow: /private/
 Disallow: /temp/
 Disallow: /.git/
 
-# Allow search engines to crawl important pages
-Allow: /index.html
-Allow: /nosotros.html
-Allow: /gracias.html
+# Allow search engines to crawl important pages (use extensionless URLs)
+Allow: /
+Allow: /nosotros
+Allow: /gracias
 Allow: /assets/
 Allow: /styles.css
 Allow: /script-nubira.js
