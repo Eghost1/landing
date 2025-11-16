@@ -114,9 +114,21 @@
             align-items: center;
             gap: 6px;
         }
-        .footer-links { order: 2; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+        /* -- Layout container que envuelve footer-content + footer-bottom
+           permite colocarlos en una fila en pantallas anchas. -- */
+        .footer-inner { width:100%; max-width:1100px; margin:0 auto; padding:0 12px; display:flex; flex-direction:column; gap:6px; align-items:center; }
+        .footer-social .footer-social-title { display:none; }
+        @media (min-width: 768px) {
+            /* Mantener centrado: redes centradas y copyright debajo */
+            .footer-inner { flex-direction:column; justify-content:center; align-items:center; }
+            .footer-content { align-items:center; }
+            .footer-social { order:1; justify-content:center; }
+            .footer-bottom { order:2; width:100%; text-align:center; margin-top:6px; }
+        }
+        /* ocultamos los enlaces de sitio en footer y mostramos las redes sociales */
+        .footer-links { display: none; }
         .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.85); opacity: 0.95; }
-        .footer-social { display: none; order: 3; }
+        .footer-social { display: flex; order: 2; gap:12px; flex-wrap:wrap; justify-content:center; align-items:center; }
         .footer-bottom { order: 4; width:100%; text-align:center; }
         .footer-section .footer-logo { display: none !important; }
         .footer-bottom p { font-size: 0.75rem; margin: 6px 0 0 0; color: rgba(255,255,255,0.7); }
@@ -197,30 +209,23 @@
     <!-- Footer from main site -->
     <footer class="footer-section">
         <div class="w-full max-w-screen-xl mx-auto px-5">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="#caracteristicas" class="footer-link" title="Funcionalidades de Nubira">Funcionalidades Nubira</a>
-                    <a href="/nosotros" class="footer-link" title="Conoce el equipo de Nubira">Nosotros</a>
-                    <a href="#contacto" class="footer-link" title="Contacta con Nubira">Contacto</a>
-                    <a href="#" class="footer-link" title="Términos y condiciones de Nubira">Términos</a>
-                    <a href="#" class="footer-link" title="Política de privacidad de Nubira">Privacidad</a>
-                </div>
-                <div class="footer-social">
-                    <h4 class="footer-social-title">Síguenos</h4>
-                    <div class="footer-social-links">
-                        <a href="https://www.instagram.com/nubira_cl/" class="footer-social-link" title="Síguenos en Instagram" target="_blank" rel="noopener noreferrer">
-                            <i data-feather="instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://www.linkedin.com/company/nubira-oficial/about/?viewAsMember=true" class="footer-social-link" title="Síguenos en LinkedIn" target="_blank" rel="noopener noreferrer">
-                            <i data-feather="linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
+            <!-- Reestructuramos: en desktop mostrar copyright a la izquierda y redes a la derecha -->
+            <div class="footer-inner">
+                    <div class="footer-bottom">
+                        <div class="footer-social">
+                        <div class="footer-social-links">
+                            <a href="https://www.instagram.com/nubira_cl/" class="footer-social-link" title="Síguenos en Instagram" target="_blank" rel="noopener noreferrer">
+                                <i data-feather="instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://www.linkedin.com/company/nubira-oficial/about/?viewAsMember=true" class="footer-social-link" title="Síguenos en LinkedIn" target="_blank" rel="noopener noreferrer">
+                                <i data-feather="linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
                     </div>
+                    <p class="footer-copyright">© 2025 Nubira - Plataforma de trabajadores verificados. Todos los derechos reservados.</p>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="footer-copyright">© 2025 Nubira - Plataforma de trabajadores verificados. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
