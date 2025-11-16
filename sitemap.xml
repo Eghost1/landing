@@ -7,15 +7,7 @@
     <!-- Página principal de Nubira -->
     <url>
         <loc>https://www.nubiraoficial.cl/</loc>
-        <lastmod>2025-08-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    
-    <!-- Página de inicio (canónica) -->
-    <url>
-        <loc>https://www.nubiraoficial.cl/</loc>
-        <lastmod>2025-08-06</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -23,7 +15,7 @@
     <!-- Página nosotros -->
     <url>
         <loc>https://www.nubiraoficial.cl/nosotros</loc>
-        <lastmod>2025-08-06</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -31,7 +23,7 @@
     <!-- Página de gracias -->
     <url>
         <loc>https://www.nubiraoficial.cl/gracias</loc>
-        <lastmod>2025-08-06</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>

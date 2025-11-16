@@ -35,11 +35,27 @@ DirectoryIndex index.html
 # ==================================================
 RewriteEngine On
 
+# Redirecciones explícitas para evitar que .html aparezca en la barra de direcciones
+# Fuerzan 301 para solicitudes antiguas que aún usan *.html
+RedirectMatch 301 ^/index\.html$ /
+RedirectMatch 301 ^/nosotros\.html$ /nosotros
+RedirectMatch 301 ^/gracias\.html$ /gracias
+RedirectMatch 301 ^/404\.html$ /pagina-no-encontrada
+RedirectMatch 301 ^/500\.html$ /error-interno
+
 # ==================================================
 # UNIVERSAL LINKS - Mantener acceso directo a .well-known
 # ==================================================
 # Asegurar que .well-known sea accesible (debe ir PRIMERO)
 RewriteRule ^\.well-known/ - [L]
+
+# Servir versiones 'limpias' de las páginas de error (slugs descriptivos)
+RewriteRule ^pagina-no-encontrada$ /404.html [L]
+RewriteRule ^error-interno$ /500.html [L]
+
+# Compatibilidad: redirigir rutas antiguas /404 y /500 a los nuevos slugs
+RewriteRule ^404$ /pagina-no-encontrada [R=301,L]
+RewriteRule ^500$ /error-interno [R=301,L]
 
 # ==================================================
 # FORZAR HTTPS Y WWW
@@ -199,8 +215,8 @@ Redirect 301 /contacto /
 # ERROR PAGES PERSONALIZADAS
 # ==================================================
 
-ErrorDocument 404 /404.html
-ErrorDocument 500 /500.html
+ErrorDocument 404 /pagina-no-encontrada
+ErrorDocument 500 /error-interno
 
 # ==================================================
 # PREVENIR HOTLINKING DE IMÁGENES
